@@ -6,7 +6,7 @@ A `Data Visualisation` project
 
 Can we dynamically plot **Al-Quran** on a `HTML` *canvas* using `JavaScript`...?
 
-I think......We can do anything in infinite time
+Here we *GO*
 
 #
 
