@@ -20,8 +20,10 @@ var boundaries = [];
 var ground;
 
 var mConstraint;
-
-
+let preloaded;
+function preload() {
+  preloaded = loadJSON("http://api.alquran.cloud/v1/ayah/" + random());
+}
 function setup() {
   var canvas = createCanvas(400, 400);
   engine = Engine.create();
