@@ -1,3 +1,4 @@
+/// <reference path="./node_modules/@types/p5/global.d.ts" />
 // Daniel Shiffman
 // http://codingtra.in
 // http://patreon.com/codingtrain
