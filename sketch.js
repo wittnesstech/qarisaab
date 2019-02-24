@@ -23,7 +23,7 @@ var ground;
 var mConstraint;
 let preloaded, ayahString;
 function preload() {
-  preloaded = loadJSON("http://api.alquran.cloud/v1/ayah/" + Math.floor(1 + random(6666)));
+  preloaded = loadJSON("https://api.alquran.cloud/v1/ayah/" + Math.floor(1 + random(6666)));
   // preloaded = {
   //   "data": {
   //     "edition": { "identifier": "quran-simple", "language": "ar", "name": "Simple", "englishName": "Simple", "format": "text" },
