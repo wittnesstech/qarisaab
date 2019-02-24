@@ -1,0 +1,24 @@
+{
+  "name": "qarisaab",
+  "version": "1.0.0",
+  "description": "a web app to be",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wittnesstech/qarisaab.git"
+  },
+  "keywords": [
+    "qari",
+    "saab",
+    "quran"
+  ],
+  "author": "Ad",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wittnesstech/qarisaab/issues"
+  },
+  "homepage": "https://github.com/wittnesstech/qarisaab#readme"
+}

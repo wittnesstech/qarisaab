@@ -26,7 +26,7 @@ Following was observed, and will serve as the TODO list :-
    * [ ] Beads need to engulf the word completely and go invisible soon
 2. Functionaliity improvements
    * [ ] SOUND
-   * [ ] Click to do something *Interactivily*
+   * [ ] Click to do something *Interactively*
    * [ ] **Draggable** canvas
    * [ ] Selectable surahs / ayahs (need more *ideas*)
   
