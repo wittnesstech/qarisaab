@@ -83,14 +83,14 @@ function beadify(inString) {
     if (!prev || i + 1 == words.length) {
       fixed = true;
     }
-    var p = new Particle(i * 40, 100, 10, fixed, words[i]);
+    var p = new Particle(i * 70, 100, 10, fixed, words[i]);
     // var p2 = new Particle(200, 150, 10);
     particles.push(p);
     if (prev) {
       var options = {
         bodyA: p.body,
         bodyB: prev.body,
-        length: 5,
+        length: 15,
         stiffness: 0.4
       };
       var constraint = Constraint.create(options);
@@ -101,10 +101,10 @@ function beadify(inString) {
 }
 
 function draw() {
-  background(51);
+  background(51,50,75);
   stroke(255);
-  fill(127);
-  textSize(24)
+  fill(100,128,100);
+  textSize(48)
   // text(ayahString, width / 3, height / 3)//,width/2 + 50,height/2 + 50)
   // tokens = ayahString.split(' ');
   // for (var index = 0; index < tokens.length; index++) {
