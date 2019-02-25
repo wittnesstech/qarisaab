@@ -83,7 +83,7 @@ function beadify(inString) {
     if (!prev || i + 1 == words.length) {
       fixed = true;
     }
-    var p = new Particle(i * 70, 100, 40, fixed, words[i]);
+    var p = new Particle(i * 70, 100, 30, fixed, words[i]);
     // var p2 = new Particle(200, 150, 10);
     particles.push(p);
     if (prev) {
