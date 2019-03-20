@@ -29,7 +29,8 @@ Following was observed, and will serve as the TODO list :-
    * [ ] SOUND
    * [ ] Multi-lingual stuff is required (Google translate **API** ?)
    * [ ] Click to do something *Interactively*
-   * [ ] **Draggable** canvas
+   * [x] **Draggable** canvas
+   ** [ ] Fix the draggable problem.... mousex ||  m.x
    * [ ] Selectable surahs / ayahs (need more *ideas*)
 3. Drama Elements  
    * [x] Need to add versioning system 

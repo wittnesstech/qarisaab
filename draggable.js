@@ -1,4 +1,4 @@
-/// <reference path="lib/p5.global-mode.d.ts" />
+/// <reference path="./node_modules/@types/p5/global.d.ts" />
 var posX = 0;
 var posY = 0;
 var locked = false;

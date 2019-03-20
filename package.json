@@ -24,6 +24,8 @@
   },
   "homepage": "https://github.com/wittnesstech/qarisaab#readme",
   "devDependencies": {
+    "@types/matter-js": "^0.10.2",
+    "@types/p5": "^0.7.2",
     "surge": "^0.20.1"
   }
 }

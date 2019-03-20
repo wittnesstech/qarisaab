@@ -1,4 +1,5 @@
 /// <reference path="./node_modules/@types/p5/global.d.ts" />
+/// <reference path="./node_modules/@types/matter-js/index.d.ts" />
 // Daniel Shiffman
 // http://codingtra.in
 // http://patreon.com/codingtrain
@@ -130,5 +131,8 @@ function draw() {
     var m = mConstraint.mouse.position;
     stroke(0, 255, 0);
     line(pos.x + offset.x, pos.y + offset.y, m.x, m.y);
+    
+    //disable canvas dragging feature
+    locked=false
   }
 }
