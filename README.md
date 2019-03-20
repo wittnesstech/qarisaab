@@ -30,7 +30,7 @@ Following was observed, and will serve as the TODO list :-
    * [ ] Multi-lingual stuff is required (Google translate **API** ?)
    * [ ] Click to do something *Interactively*
    * [x] **Draggable** canvas
-   ** [ ] Fix the draggable problem.... mousex ||  m.x
+        * [ ] Fix the draggable problem.... mousex ||  m.x
    * [ ] Selectable surahs / ayahs (need more *ideas*)
 3. Drama Elements  
    * [x] Need to add versioning system 
