@@ -101,6 +101,7 @@ function beadify(inString) {
 }
 
 function draw() {
+  translate(posX?posX:0,posY?posY:0);
   background(51,50,75);
   stroke(255);
   fill(100,128,100);

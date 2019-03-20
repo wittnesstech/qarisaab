@@ -34,7 +34,7 @@ function Particle(x, y, r, fixed, word) {
     strokeWeight(1);
     stroke(255);
     fill(127);
-    ellipse(0, 0, this.r * 2);
+    // ellipse(0, 0, this.r * 2);
     // line(0, 0, this.r, 0);
     text(this.word, 0, 0);
     pop();
