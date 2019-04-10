@@ -19,12 +19,15 @@ Following was observed, and will serve as the TODO list :-
 
 
 1. Design needs work
+   * [ ] Better UI based on [Vuetify](https://github.com/vuetifyjs/vuetify)
    * [ ] FG & BG colors suck
    * [ ] font size relatively small
    * [ ] The string are less physics-sy
    * [ ] long and short ayahs / relative words as to screen size
    * [ ] Beads need to engulf the word completely and go invisible soon
 2. Functionaliity improvements
+   * [ ] Add Facebook Login feature
+   * [ ] Add Firebase Database
    * [ ] Reset / Reload button or something
    * [ ] SOUND
    * [ ] Multi-lingual stuff is required (Google translate **API** ?)
@@ -35,7 +38,6 @@ Following was observed, and will serve as the TODO list :-
 3. Drama Elements  
    * [x] Need to add versioning system 
    * [x] Publish to [NPM](https://www.npmjs.com/package/qarisaab)
-
-
+   * [x] Add [Vue.js](https://github.com/vuejs/vue) framework
 
 > **PS:** Markdown is *sleek,* so here's a quick [**Cheat Sheet**](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and  [this guy](https://www.toptal.com/web/markdown-the-writing-tool-for-software-developers) explains why we need to learn this =>
