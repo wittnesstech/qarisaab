@@ -1,43 +1,51 @@
-# Qari Saab
+## Qari Saab
 
+######A `Data Visualisation` Project
 
-A `Data Visualisation` project
-#
+---
 
-Can we dynamically plot **Al-Quran** on a `HTML` *canvas* using `JavaScript`...?
+Can we dynamically plot **Al-Quran** on a `HTML` _canvas_ using `JavaScript` _...?_
 
-Here we *GO*
+Here we _GO_
 
-#
-Made the app available at [Qari Saab](https://qarisaab.surge.sh)
-We are now on [npm](https://www.npmjs.com/package/qarisaab)
+Hosted version of the app is available at [Qari Saab][hostedlink]
+We are also on [npm][npmqarisaab]
 
-Following was observed, and will serve as the TODO list :-
-* [ ] Strange look on mobile screens
+###TODOs
 
-* [ ] Also very slow on mobiles, maybe it's something related to DPI
+#####Design
 
+- [x] Add [Vue][vuelink] framework
+- [x] Better UI based on [Vuetify][vuetifylink]
 
-1. Design needs work
-   * [ ] Better UI based on [Vuetify](https://github.com/vuetifyjs/vuetify)
-   * [ ] FG & BG colors suck
-   * [ ] font size relatively small
-   * [ ] The string are less physics-sy
-   * [ ] long and short ayahs / relative words as to screen size
-   * [ ] Beads need to engulf the word completely and go invisible soon
-2. Functionaliity improvements
-   * [ ] Add Facebook Login feature
-   * [ ] Add Firebase Database
-   * [ ] Reset / Reload button or something
-   * [ ] SOUND
-   * [ ] Multi-lingual stuff is required (Google translate **API** ?)
-   * [ ] Click to do something *Interactively*
-   * [x] **Draggable** canvas
-        * [ ] Fix the draggable problem.... mousex ||  m.x
-   * [ ] Selectable surahs / ayahs (need more *ideas*)
-3. Drama Elements  
-   * [x] Need to add versioning system 
-   * [x] Publish to [NPM](https://www.npmjs.com/package/qarisaab)
-   * [x] Add [Vue.js](https://github.com/vuejs/vue) framework
+#####Functionaliity
 
-> **PS:** Markdown is *sleek,* so here's a quick [**Cheat Sheet**](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and  [this guy](https://www.toptal.com/web/markdown-the-writing-tool-for-software-developers) explains why we need to learn this =>
+- [ ] Add Facebook Login feature
+- [ ] Add Persistance via _Firebase Database..?_
+- [ ] Reset / Reload button or something
+- [ ] SOUND
+- [ ] Multi-lingual stuff is required (Google translate **API** ?)
+
+#####p5 Canvas
+
+- [ ] FG & BG colors suck
+- [ ] Font size relatively small
+- [ ] The string are less physics-sy
+- [ ] Click to do something _Interactively_
+- [x] **Draggable** canvas
+  - [ ] Fix the draggable problem.... mousex || m.x
+- [ ] Selectable surahs / ayahs (need more _ideas_)
+- [ ] Long and short ayahs / relative words as to screen size
+- [ ] Beads need to engulf the word completely and go invisible soon
+
+#####Misc
+
+- [x] Need to add versioning system
+- [x] Publish to [NPM][npmqarisaab]
+
+> **PS:** Markdown is _sleek,_ so here's a quick [**Cheat Sheet**](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and [this guy](https://www.toptal.com/web/markdown-the-writing-tool-for-software-developers) explains why we need to learn this =>
+
+[hostedlink]: https://qarisaab.surge.sh
+[vuelink]: https://github.com/vuejs/vue
+[vuetifylink]: https://github.com/vuetifyjs/vuetify
+[npmqarisaab]: https://www.npmjs.com/package/qarisaab
