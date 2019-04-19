@@ -10,7 +10,7 @@
       overflow
       app
     >
-    <v-icon>"mdi-home"</v-icon>
+    <!-- <v-icon>fingerprint</v-icon> -->
     <v-list dense class="pt-0">
       <v-list-tile
         v-for="item in myRoutes"
@@ -19,8 +19,8 @@
       >
         <v-list-tile-action>
           <v-icon>{{ item.icon }}</v-icon>
-        </v-list-tile-action>
 
+        </v-list-tile-action>
         <v-list-tile-content>
           <v-list-tile-title :to="item.path">{{ item.name }}</v-list-tile-title>
         </v-list-tile-content>
@@ -56,7 +56,12 @@
 
 <script>
 import routes from "./router";
+import Vue from "vue";
+import Matter from "matter-js";
+import axios from "axios";
 // import Router from "vue-router";
+Object.defineProperty(Vue.prototype, '$Matter', { value: Matter });
+Object.defineProperty(Vue.prototype, '$axios', { value: axios });
 export default {
   name: "App",
   data: () => ({
