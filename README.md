@@ -45,7 +45,7 @@ We are also on [npm][npmqarisaab]
 
 > **PS:** Markdown is _sleek,_ so here's a quick [**Cheat Sheet**](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and [this guy](https://www.toptal.com/web/markdown-the-writing-tool-for-software-developers) explains why we need to learn this =>
 
-[hostedlink]: https://qarisaab.surge.sh
+[hostedlink]: qarisaab.surge.sh
 [vuelink]: https://github.com/vuejs/vue
 [vuetifylink]: https://github.com/vuetifyjs/vuetify
 [npmqarisaab]: https://www.npmjs.com/package/qarisaab
