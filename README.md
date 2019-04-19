@@ -1,6 +1,6 @@
 ## Qari Saab
 
-######A `Data Visualisation` Project
+#####A `Data Visualisation` Project
 
 ---
 
@@ -13,12 +13,12 @@ We are also on [npm][npmqarisaab]
 
 ###TODOs
 
-#####Design
+####Design
 
 - [x] Add [Vue][vuelink] framework
 - [x] Better UI based on [Vuetify][vuetifylink]
 
-#####Functionaliity
+####Functionaliity
 
 - [ ] Add Facebook Login feature
 - [ ] Add Persistance via _Firebase Database..?_
@@ -26,7 +26,7 @@ We are also on [npm][npmqarisaab]
 - [ ] SOUND
 - [ ] Multi-lingual stuff is required (Google translate **API** ?)
 
-#####p5 Canvas
+####p5 Canvas
 
 - [ ] FG & BG colors suck
 - [ ] Font size relatively small
@@ -38,7 +38,7 @@ We are also on [npm][npmqarisaab]
 - [ ] Long and short ayahs / relative words as to screen size
 - [ ] Beads need to engulf the word completely and go invisible soon
 
-#####Misc
+####Misc
 
 - [x] Need to add versioning system
 - [x] Publish to [NPM][npmqarisaab]
