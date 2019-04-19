@@ -9,6 +9,7 @@ Can we dynamically plot **Al-Quran** on a `HTML` _canvas_ using `JavaScript` _..
 Here we _GO_
 
 Hosted version of the app is available at [Qari Saab][hostedlink]
+
 We are also on [npm][npmqarisaab]
 
 ### TODOs
