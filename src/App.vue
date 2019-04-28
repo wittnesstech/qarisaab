@@ -59,6 +59,9 @@ import routes from "./router";
 import Vue from "vue";
 import Matter from "matter-js";
 import axios from "axios";
+// https://www.npmjs.com/package/vue-swatches
+// Import the styles too, globally 
+import "vue-swatches/dist/vue-swatches.min.css"
 // import Router from "vue-router";
 Object.defineProperty(Vue.prototype, '$Matter', { value: Matter });
 Object.defineProperty(Vue.prototype, '$axios', { value: axios });

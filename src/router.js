@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Example from "./components/Example.vue"
+import Spirograph from "./components/Spirograph.vue"
 
 Vue.use(Router);
 
@@ -9,6 +10,12 @@ export default new Router({
   routes: [
     {
       path: "/",
+      name: "spirograph",
+      component: Spirograph,
+      icon:"refresh"
+    },
+    {
+      path: "/home",
       name: "home",
       component: Home,
       icon:"fingerprint"
