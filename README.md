@@ -36,7 +36,7 @@ We are also on [npm][npmqarisaab]
 - [x] **Draggable** canvas
   - [ ] Fix the draggable problem.... mousex || m.x
 - [ ] Selectable surahs / ayahs (need more _ideas_)
-- [ ] Long and short ayahs / relative words as to screen size
+- [ ] Long and short ayahs / relative words as to screen size - Why not use scrollview?
 - [ ] Beads need to engulf the word completely and go invisible soon
 
 #### Misc
