@@ -1,6 +1,9 @@
 <template>
   <v-container xs12>
-    <v-select
+    <flag iso="pk"/>
+    <Edition :list="editionList" @edition-selected="eventReceived"></Edition>
+    <SurahSelect :list="surahList" @surah-selected="changeSelectedSurah"></SurahSelect>
+    <!-- <v-select
       @change="loadNewSurah()"
       class="arabicText medText"
       v-model="selectedSurah"
@@ -11,7 +14,7 @@
       persistent-hint
       return-object
       single-line
-    ></v-select>
+    ></v-select>-->
     <div v-if="selectedSurah===null">
       Loading...
       <!-- fatiha:{{fatiha}} -->
@@ -25,11 +28,15 @@
 
 <script>
 import Surah from "../views/Surah";
+import Edition from "../views/Edition";
+import SurahSelect from "../views/SurahSelect";
 export default {
   data: () => ({
     //surahList needs another component/view
     surahList: null,
+    editionList: [],
     selectedSurah: null,
+    selectedEdition: {},
     surah: null,
     fatiha: null,
     translationText: null,
@@ -42,13 +49,17 @@ export default {
     ]
   }),
   components: {
-    Surah
+    Surah,
+    Edition,
+    SurahSelect
   },
   created: async function() {
     // console.log("created1");
     await this.getFatiha();
     await this.populateSurahList();
+    await this.populateEditionList();
     this.selectedSurah = this.fatiha;
+    this.selectedEdition = this.editionList[3];
     await this.getTranslation();
     // console.log("created");
     // console.log(" fatiha : ", this.fatiha);
@@ -58,6 +69,14 @@ export default {
     // this.selectedSurah = this.surahList.data[0];
   },
   methods: {
+    eventReceived(e) {
+      console.log(Object.keys(e), e);
+    },
+    changeSelectedSurah(s) {
+      this.selectedSurah = s;
+      this.loadNewSurah();
+    },
+    filterByType() {},
     getFatiha() {
       return this.$axios({
         method: "get",
@@ -69,6 +88,17 @@ export default {
       });
       // console.log("surah:", response.data);
       // console.log("created");
+    },
+    populateEditionList() {
+      return this.$axios({
+        method: "get",
+        url: "http://api.alquran.cloud/v1/edition",
+        responseType: "json"
+      }).then(response => {
+        // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
+        // console.log("surahList:", response.data);
+        this.editionList = response.data.data;
+      });
     },
     populateSurahList() {
       return this.$axios({
@@ -114,6 +144,7 @@ export default {
           "http://api.alquran.cloud/v1/surah/" +
           this.selectedSurah.number +
           "/en.sahih",
+        // http://api.alquran.cloud/v1/edition?format=text&language=ur
         responseType: "json"
       }).then(response => {
         // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))

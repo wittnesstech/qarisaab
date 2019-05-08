@@ -16,6 +16,10 @@ We are also on [npm][npmqarisaab]
 
 #### Design
 
+##### Display
+
+- [ ] country / language flags are pathat... needs changing
+
 - [x] Add [Vue][vuelink] framework
 - [x] Better UI based on [Vuetify][vuetifylink]
 
