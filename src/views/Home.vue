@@ -43,7 +43,6 @@
 </template>
 
 <script>
-// import Example from "../components/Example"
 export default {
   data: () => ({
     //surahList needs another component/view
