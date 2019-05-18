@@ -55,7 +55,7 @@ import axios from "axios";
 // https://www.npmjs.com/package/vue-swatches
 // Import the styles too, globally
 import "vue-swatches/dist/vue-swatches.min.css";
-import FlagIcon from 'vue-flag-icon';
+import FlagIcon from "vue-flag-icon";
 Vue.use(FlagIcon);
 // import Router from "vue-router";
 Object.defineProperty(Vue.prototype, "$Matter", { value: Matter });

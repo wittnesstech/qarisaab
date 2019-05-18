@@ -1,6 +1,14 @@
 <template>
   <v-container xs12>
+    <!-- Type Filter 
+    "tafsir",
+    "translation",
+    "quran",
+    "transliteration",
+    "versebyverse"-->
+    <!-- <v-checkbox v-model="translationFilter" :label="`Translation: ${translationFilter.toString()}`"></v-checkbox> -->
     <!-- emit change -->
+    <!-- ...{{filteredList}}... -->
     <flag :iso="selectedEdition.language"/>
     <v-select
       v-model="selectedEdition"
@@ -46,20 +54,39 @@
 
 <script>
 export default {
-  props: ["list"],
+  props: ["list", "filterMode"],
   data: () => ({
     //surahList needs another component/view
     // editionList: null,
-    selectedEdition: {}
+    selectedEdition: {},
+    filteredList: []
+    // translationFilter: false
   }),
   components: {},
-  created: async function() {
+  created: function() {
+    // console.log("prefilter list", this.list);
+    // console.log("filtermODE:", this.filterMode);
+    // let mode = this.filterMode;
+    this.filteredList = this.list.filter(function(x) {
+      return x.type === "translation";
+    });
+    console.log("postfilter list", this.filteredList);
+    // filteredList = list;
     // console.log("created1");
   },
   methods: {
-    filterByType() {},
+    // filterByType(val) {},
     onSelection() {
       this.$emit("edition-selected", this.selectedEdition);
+    }
+  },
+  computed: {
+    filterList() {
+      console.log("wtf", this.list);
+      this.filteredList = this.list.filter(y => {
+        return y.filter === this.filter;
+      });
+      return this.filteredList;
     }
   }
 };
