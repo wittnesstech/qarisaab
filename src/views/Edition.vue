@@ -16,9 +16,9 @@
       class="medText"
       :items="list"
       item-text="name"
-      :hint="`${selectedEdition.language} - ${selectedEdition.format}`"
+      :hint="`${selectedEdition.englishName}(${selectedEdition.language})`"
       item-value="identifier"
-      label="Editions"
+      label="Translations"
       persistent-hint
       return-object
       single-line

@@ -1,25 +1,15 @@
 <template>
   <v-container xs12>
+    {{computedFunc}}
     <!-- {{surahList}} -->
     <!-- <br> -->
     <!-- {{fatiha}} -->
+    <!-- v-for="(item, i) in 5" :key="i" -->
     <div>
-      <div class="text-xs-center mb-3">{{ panel }}</div>
-      <v-expansion-panel v-model="panel" expand>
-        <v-expansion-panel-content>
-          <!-- v-for="(item, i) in 5" :key="i" -->
-          <template v-slot:header>
-            <div>Settings</div>
-          </template>
-          <v-card>
-            <v-card-text>
-              <flag iso="pk"/>
-              <Edition :list @edition-selected="eventReceived"></Edition>
-              <SurahSelect :list="surahList" @surah-selected="changeSelectedSurah"></SurahSelect>
-            </v-card-text>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
+      Settings
+      <flag iso="pk"/>
+      <Edition :list="translationList" @edition-selected="translationReceived"></Edition>
+      <SurahSelect :list="surahList" @surah-selected="changeSelectedSurah"></SurahSelect>
     </div>
 
     <!-- <v-select
@@ -49,30 +39,14 @@ import staticData from "../staticData";
 export default {
   data: () => ({
     //surahList needs another component/view
-    surahList: [],
+    surahList: staticData.surahList,
+    editionList: staticData.editionList,
+    translationList: staticData.translations,
+    translationEdition: { identifier: "en.sahih" },
+    fatiha: staticData.fatiha,
+    languages: staticData.languages,
     selectedSurah: {},
-    selectedEdition: {},
-    editionData: {
-      editionList: [],
-      editionTypes: [
-        "tafsir",
-        "translation",
-        "quran",
-        "transliteration",
-        "versebyverse"
-      ],
-      editionListsFiltered: {
-        tafsirs: [],
-        translations: [],
-        qurans: [],
-        transliterations: [],
-        versebyverses: []
-      }
-    },
-    surah: {},
-    fatiha: {},
     translationText: {},
-    filterTranslation: "translation",
     fontOptions: [
       { name: "Amiri", style: "serif" },
       { name: "Lalezar", style: "cursive" },
@@ -89,15 +63,15 @@ export default {
   created: function() {
     console.log("Helper loaded:", Helper);
     console.log("staticData loaded:", staticData);
+    // console.log("surahList :", this.surahList);
+    // console.log("editions list:", this.editionList);
     // console.log("created1");
     // await this.getFatiha();
     // this.selectedSurah = fatiha;
-    this.surahList = staticData.surahList;
-    this.editionList = staticData.editionList;
-    this.filterEditions();
-    console.log("editions filtered:", this.editionData);
-    this.fatiha = staticData.fatiha;
-    // this.selectedEdition = this.editionList[3];
+    // this.surahList = staticData.surahList;
+    // this.editionList = staticData.editionList;
+    // this.filterEditions();
+    // this.fatiha = staticData.fatiha;
     // await this.getTranslation();
     // console.log("created");
     // console.log(" fatiha : ", this.fatiha);
@@ -106,57 +80,26 @@ export default {
     // console.log(" selected : ", this.selectedSxurah);
     // this.selectedSurah = this.surahList.data[0];
   },
-  computed: {},
+  computed: {
+    computedFunc() {
+      console.log("computating");
+      //TODO check filter computed  output here
+      return 0;
+    }
+  },
   methods: {
-    filterEditions() {
-      console.log("list to filter:", this.editionList);
-      this.editionData.editionListsFiltered.tafsirs = this.editionList.filter(
-        x => {
-          return x.type === "tafsir";
-        }
-      );
-      this.editionData.editionListsFiltered.translations = this.editionList.filter(
-        x => {
-          return x.type === "translation";
-        }
-      );
-      this.editionData.editionListsFiltered.qurans = this.editionList.filter(
-        x => {
-          return x.type === "quran";
-        }
-      );
-      this.editionData.editionListsFiltered.versebyverses = this.editionList.filter(
-        x => {
-          return x.type === "versebyverse";
-        }
-      );
-      this.editionData.editionListsFiltered.transliterations = this.editionList.filter(
-        x => {
-          return x.type === "transliteration";
-        }
-      );
-    },
-    eventReceived(e) {
-      console.log(Object.keys(e), e);
+    filterEditions() {},
+    translationReceived(e) {
+      // console.log(Object.keys(e), e);
+      //TODO Handle the edition / translation change
+      this.translationEdition = e;
+      console.log("translation selected");
     },
     changeSelectedSurah(s) {
       this.selectedSurah = s;
       this.loadNewSurah();
     },
     filterByType() {},
-    getFatiha() {
-      return this.$axios({
-        method: "get",
-        url: "http://api.alquran.cloud/v1/surah/" + 1,
-        // Math.floor(Math.random() * 114),
-        responseType: "json"
-      }).then(response => {
-        this.fatiha = response.data.data;
-      });
-      // console.log("surah:", response.data);
-      // console.log("created");
-    },
-
     loadNewSurah() {
       // console.log(this.$axios);
       // GET request for remote image
@@ -175,7 +118,8 @@ export default {
         url:
           "http://api.alquran.cloud/v1/surah/" +
           this.selectedSurah.number +
-          "/en.sahih",
+          "/" +
+          this.translationEdition.identifier,
         responseType: "json"
       }).then(response => {
         // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
@@ -189,7 +133,8 @@ export default {
         url:
           "http://api.alquran.cloud/v1/surah/" +
           this.selectedSurah.number +
-          "/en.sahih",
+          "/" +
+          this.translationEdition.identifier,
         // http://api.alquran.cloud/v1/edition?format=text&language=ur
         responseType: "json"
       }).then(response => {
