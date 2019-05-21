@@ -10,9 +10,7 @@
       item-value="number"
       label="Surahs"
       :hint="`${selectedSurah.name} - ${selectedSurah.englishName}`"
-      persistent-hint
       return-object
-      single-line
     ></v-select>
   </v-container>
 </template>

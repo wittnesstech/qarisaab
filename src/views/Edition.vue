@@ -19,9 +19,7 @@
       :hint="`${selectedEdition.englishName}(${selectedEdition.language})`"
       item-value="identifier"
       label="Translations"
-      persistent-hint
       return-object
-      single-line
     ></v-select>
     <!-- :v-if="edition.format==='text'"> -->
     <!-- <div v-for="(edition,index) in list" :key="edition.identifier">

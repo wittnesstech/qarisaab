@@ -33,16 +33,16 @@
       <v-toolbar-title>Qari Saab</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid>
-        <v-layout align-center justify-center>
-          <v-flex xs10>
-            <router-view/>
-          </v-flex>
-        </v-layout>
-      </v-container>
+      <!-- <v-container fluid> -->
+      <!-- <v-layout align-center justify-center> -->
+      <!-- <v-flex xs10> -->
+      <router-view/>
+      <!-- </v-flex> -->
+      <!-- </v-layout> -->
+      <!-- </v-container> -->
     </v-content>
     <v-footer :inset="true" app>
-      <span v-on:click="showRoutes()" class="px-3">&copy; {{ new Date().getFullYear() }}</span>
+      <span class="px-3">&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
   </v-app>
 </template>
@@ -79,9 +79,6 @@ export default {
     // ]
   }),
   methods: {
-    showRoutes: () => {
-      console.log(myRoutes);
-    },
     goto: pathstring => {
       this.$router.push(pathstring);
     }

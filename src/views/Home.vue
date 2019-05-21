@@ -1,17 +1,40 @@
 <template>
-  <v-container xs12>
+  <v-container fluid>
+    <!-- <v-layout row> -->
+    <!-- <v-flex> -->
     <!-- {{computedFunc}}
     {{alteredSurah}} = {{alteredTranslation}}-->
     <!-- {{surahList}} -->
     <!-- <br> -->
     <!-- {{fatiha}} -->
     <!-- v-for="(item, i) in 5" :key="i" -->
-    <div>
-      Settings
-      <flag iso="pk"/>
-      <Edition :list="translationList" @edition-selected="translationReceived"></Edition>
-      <SurahSelect :list="surahList" @surah-selected="changeSelectedSurah"></SurahSelect>
-    </div>
+    <v-layout align-center justify-space-around row>
+      <!-- <flag iso="pk"/> -->
+      <v-expansion-panel popout xs6>
+        <v-expansion-panel-content>
+          <template v-slot:header>
+            <div>Translations</div>
+          </template>
+          <v-card>
+            <v-card-text>
+              <Edition :list="translationList" @edition-selected="translationReceived"></Edition>
+            </v-card-text>
+          </v-card>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+      <v-expansion-panel popout xs6>
+        <v-expansion-panel-content>
+          <template v-slot:header>
+            <div>Surah</div>
+          </template>
+          <v-card>
+            <v-card-text>
+              <SurahSelect :list="surahList" @surah-selected="changeSelectedSurah"></SurahSelect>
+            </v-card-text>
+          </v-card>
+        </v-expansion-panel-content>
+      </v-expansion-panel>
+    </v-layout>
 
     <!-- <v-select
       @change="loadNewSurah()"
@@ -29,6 +52,8 @@
     <div v-if="!isLoading">
       <Surah :inputSurah="selectedSurah" :translationText="translationText"></Surah>
     </div>
+    <!-- </v-flex> -->
+    <!-- </v-layout> -->
   </v-container>
 </template>
 
@@ -185,7 +210,7 @@ export default {
 }
 
 .medText {
-  font-size: 2em;
+  font-size: 2rem;
 }
 
 .smallText {
