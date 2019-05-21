@@ -1,6 +1,7 @@
 <template>
   <v-container xs12>
-    {{computedFunc}}
+    <!-- {{computedFunc}}
+    {{alteredSurah}} = {{alteredTranslation}}-->
     <!-- {{surahList}} -->
     <!-- <br> -->
     <!-- {{fatiha}} -->
@@ -24,7 +25,8 @@
       return-object
       single-line
     ></v-select>-->
-    <div>
+    <div v-if="isLoading">is loading</div>
+    <div v-if="!isLoading">
       <Surah :inputSurah="selectedSurah" :translationText="translationText"></Surah>
     </div>
   </v-container>
@@ -39,13 +41,16 @@ import staticData from "../staticData";
 export default {
   data: () => ({
     //surahList needs another component/view
+    isLoading: false,
     surahList: staticData.surahList,
     editionList: staticData.editionList,
     translationList: staticData.translations,
     translationEdition: { identifier: "en.sahih" },
+    alteredSurah: true,
+    alteredTranslation: true,
     fatiha: staticData.fatiha,
     languages: staticData.languages,
-    selectedSurah: {},
+    selectedSurah: { number: 1 },
     translationText: {},
     fontOptions: [
       { name: "Amiri", style: "serif" },
@@ -60,29 +65,21 @@ export default {
     Edition,
     SurahSelect
   },
+  mounted: function() {
+    // console.log("ssssss", this.selectedSurah.number);
+    this.repaint();
+  },
   created: function() {
-    console.log("Helper loaded:", Helper);
-    console.log("staticData loaded:", staticData);
-    // console.log("surahList :", this.surahList);
-    // console.log("editions list:", this.editionList);
-    // console.log("created1");
-    // await this.getFatiha();
-    // this.selectedSurah = fatiha;
-    // this.surahList = staticData.surahList;
-    // this.editionList = staticData.editionList;
-    // this.filterEditions();
-    // this.fatiha = staticData.fatiha;
-    // await this.getTranslation();
-    // console.log("created");
-    // console.log(" fatiha : ", this.fatiha);
-    // console.log(" surahList : ", this.surahList);
-    // console.log(" translation : ", this.translationText);
-    // console.log(" selected : ", this.selectedSxurah);
-    // this.selectedSurah = this.surahList.data[0];
+    console.log("filtering...");
+    this.translationEdition = this.editionList.filter(function(x) {
+      return x.identifier === "en.sahih";
+    });
+    // console.log("filtering... : ", temp);
+    // console.log("staticData loaded:", staticData);
   },
   computed: {
     computedFunc() {
-      console.log("computating");
+      // console.log("computating");
       //TODO check filter computed  output here
       return 0;
     }
@@ -93,13 +90,40 @@ export default {
       // console.log(Object.keys(e), e);
       //TODO Handle the edition / translation change
       this.translationEdition = e;
-      console.log("translation selected");
+      // this.alteredTranslation = true;
+      this.repaint();
+      // console.log("translation selected : ", this.translationEdition);
     },
     changeSelectedSurah(s) {
       this.selectedSurah = s;
-      this.loadNewSurah();
+      // this.alteredSurah = true;
+      this.repaint();
+      // console.log("surah selected : ", this.selectedSurah);
     },
     filterByType() {},
+    async repaint() {
+      // console.log(
+      // "repaint called :",
+      // this.alteredSurah,
+      // this.alteredTranslation
+      // );
+      this.isLoading = true;
+      // console.log("phase 1");
+      // if (this.alteredSurah) {
+      await this.loadNewSurah();
+      // this.alteredSurah = false;
+      // }
+      // console.log("phase 2");
+      // if (this.alteredTranslation) {
+      await this.loadNewTranslation();
+      // this.alteredTranslation = false;
+      // }
+
+      // console.log("phase 3");
+
+      // console.log("helper here...", Helper);
+      this.isLoading = false;
+    },
     loadNewSurah() {
       // console.log(this.$axios);
       // GET request for remote image
@@ -111,23 +135,10 @@ export default {
         // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
         // console.log("surah:", response.data);
         this.selectedSurah = response.data.data;
-      });
-      console.log("testing pt");
-      this.$axios({
-        method: "get",
-        url:
-          "http://api.alquran.cloud/v1/surah/" +
-          this.selectedSurah.number +
-          "/" +
-          this.translationEdition.identifier,
-        responseType: "json"
-      }).then(response => {
-        // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-        // console.log("translationData:", response.data);
-        this.translationText = response.data.data;
+        // console.log("Surah loaded : ", this.selectedSurah);
       });
     },
-    getTranslation() {
+    loadNewTranslation() {
       return this.$axios({
         method: "get",
         url:
@@ -139,8 +150,8 @@ export default {
         responseType: "json"
       }).then(response => {
         // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-        console.log("translationData:", response.data);
         this.translationText = response.data.data;
+        // console.log("translation loaded:", this.translationText);
       });
     }
   }

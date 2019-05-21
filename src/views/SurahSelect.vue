@@ -26,7 +26,8 @@ export default {
     selectedSurah: {}
   }),
   components: {},
-  created: async function() {
+  mounted: function() {
+    // this.selectedSurah = this.list[0];
     // console.log("created1");
   },
   methods: {

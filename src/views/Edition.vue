@@ -64,6 +64,7 @@ export default {
   }),
   components: {},
   created: function() {
+    // this.selectedEdition = this.list[0];
     // console.log("prefilter list", this.list);
     // console.log("filtermODE:", this.filterMode);
     // let mode = this.filterMode;

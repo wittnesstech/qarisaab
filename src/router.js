@@ -1,8 +1,8 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
-import Example from "./components/Example.vue";
-import Spirograph from "./components/Spirograph.vue";
+// import Example from "./components/Example.vue";
+// import Spirograph from "./components/Spirograph.vue";
 
 Vue.use(Router);
 
@@ -14,18 +14,18 @@ export default new Router({
       component: Home,
       icon: "fingerprint"
     },
-    {
-      path: "/spirograph",
-      name: "spirograph",
-      component: Spirograph,
-      icon: "refresh"
-    },
-    {
-      path: "/example",
-      name: "example",
-      component: Example,
-      icon: "transform"
-    },
+    // {
+    //   path: "/spirograph",
+    //   name: "spirograph",
+    //   component: Spirograph,
+    //   icon: "refresh"
+    // },
+    // {
+    //   path: "/example",
+    //   name: "example",
+    //   component: Example,
+    //   icon: "transform"
+    // },
     {
       path: "/about",
       name: "about",
