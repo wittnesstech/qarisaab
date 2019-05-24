@@ -52,7 +52,7 @@
 
 <script>
 export default {
-  props: ["list", "filterMode"],
+  props: ["list", "selected"],
   data: () => ({
     //surahList needs another component/view
     // editionList: null,
@@ -62,6 +62,7 @@ export default {
   }),
   components: {},
   created: function() {
+    this.selectedEdition = this.selected;
     // this.selectedEdition = this.list[0];
     // console.log("prefilter list", this.list);
     // console.log("filtermODE:", this.filterMode);

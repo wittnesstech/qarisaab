@@ -13,10 +13,14 @@
       <!-- <flag iso="pk"/> -->
       <Edition
         :list="translationList"
-        :target="selectedTranslation"
+        :selected="selectedTranslation"
         @edition-selected="translationReceived"
       ></Edition>
-      <SurahSelect :list="surahList" @surah-selected="changeSelectedSurah"></SurahSelect>
+      <SurahSelect
+        :list="surahList"
+        :selected="selectedSurah"
+        @surah-selected="changeSelectedSurah"
+      ></SurahSelect>
       <!-- <v-expansion-panel popout xs6>
         <v-expansion-panel-content>
           <template v-slot:header>

@@ -3,7 +3,7 @@
     <!-- <flag :iso="selectedEdition.language"/> -->
     <v-select
       @change="onSelection"
-      class="arabicText medText"
+      class="medText"
       v-model="selectedSurah"
       :items="list"
       item-text="name"
@@ -17,13 +17,16 @@
 
 <script>
 export default {
-  props: ["list"],
+  props: ["list", "selected"],
   data: () => ({
     //surahList needs another component/view
     // editionList: null,
     selectedSurah: {}
   }),
   components: {},
+  created: function() {
+    this.selectedSurah = this.selected;
+  },
   mounted: function() {
     // this.selectedSurah = this.list[0];
     // console.log("created1");
