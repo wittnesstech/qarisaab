@@ -1,5 +1,6 @@
 <template>
   <v-container fluid>
+    <!-- {{getTranslationList}} -->
     <!-- <v-layout row> -->
     <!-- <v-flex> -->
     <!-- {{computedFunc}}
@@ -10,15 +11,19 @@
     <!-- v-for="(item, i) in 5" :key="i" -->
     <v-layout align-center justify-space-around row>
       <!-- <flag iso="pk"/> -->
-      <v-expansion-panel popout xs6>
+      <Edition
+        :list="translationList"
+        :target="selectedTranslation"
+        @edition-selected="translationReceived"
+      ></Edition>
+      <SurahSelect :list="surahList" @surah-selected="changeSelectedSurah"></SurahSelect>
+      <!-- <v-expansion-panel popout xs6>
         <v-expansion-panel-content>
           <template v-slot:header>
             <div>Translations</div>
           </template>
           <v-card>
-            <v-card-text>
-              <Edition :list="translationList" @edition-selected="translationReceived"></Edition>
-            </v-card-text>
+            <v-card-text></v-card-text>
           </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
@@ -28,12 +33,10 @@
             <div>Surah</div>
           </template>
           <v-card>
-            <v-card-text>
-              <SurahSelect :list="surahList" @surah-selected="changeSelectedSurah"></SurahSelect>
-            </v-card-text>
+            <v-card-text></v-card-text>
           </v-card>
         </v-expansion-panel-content>
-      </v-expansion-panel>
+      </v-expansion-panel>-->
     </v-layout>
 
     <!-- <v-select
@@ -61,21 +64,21 @@
 import Surah from "../views/Surah";
 import Edition from "../views/Edition";
 import SurahSelect from "../views/SurahSelect";
-import Helper from "../helper";
+import Helper from "../lib/helper";
 import staticData from "../staticData";
 export default {
   data: () => ({
     //surahList needs another component/view
     isLoading: false,
     surahList: staticData.surahList,
+    selectedSurah: staticData.fatiha,
     editionList: staticData.editionList,
     translationList: staticData.translations,
-    translationEdition: { identifier: "en.sahih" },
+    selectedTranslation: staticData.defaultTranslation,
     alteredSurah: true,
     alteredTranslation: true,
     fatiha: staticData.fatiha,
     languages: staticData.languages,
-    selectedSurah: { number: 1 },
     translationText: {},
     fontOptions: [
       { name: "Amiri", style: "serif" },
@@ -95,18 +98,24 @@ export default {
     this.repaint();
   },
   created: function() {
-    console.log("filtering...");
-    this.translationEdition = this.editionList.filter(function(x) {
-      return x.identifier === "en.sahih";
-    });
+    // console.log("filtering...");
+    // this.translationEdition = this.editionList.filter(function(x) {
+    //   return x.identifier === "en.sahih";
+    // });
     // console.log("filtering... : ", temp);
     // console.log("staticData loaded:", staticData);
+    this.repaint();
   },
   computed: {
     computedFunc() {
       // console.log("computating");
       //TODO check filter computed  output here
       return 0;
+    },
+    getTranslationList() {
+      return this.editionList.filter(function(x) {
+        return x.type === "translation";
+      });
     }
   },
   methods: {
@@ -114,7 +123,7 @@ export default {
     translationReceived(e) {
       // console.log(Object.keys(e), e);
       //TODO Handle the edition / translation change
-      this.translationEdition = e;
+      this.selectedTranslation = e;
       // this.alteredTranslation = true;
       this.repaint();
       // console.log("translation selected : ", this.translationEdition);
@@ -170,7 +179,7 @@ export default {
           "http://api.alquran.cloud/v1/surah/" +
           this.selectedSurah.number +
           "/" +
-          this.translationEdition.identifier,
+          this.selectedTranslation.identifier,
         // http://api.alquran.cloud/v1/edition?format=text&language=ur
         responseType: "json"
       }).then(response => {

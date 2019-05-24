@@ -17,9 +17,9 @@
       </div>
       <div v-else>
         {{translationText.ayahs[index].text}}
-        <span class="translationIdentifier">
-          <v-chip>{{translationText.edition.identifier}}</v-chip>
-        </span>
+        <!-- <span class="translationIdentifier ">
+          <v-chip>{{translationText.edition.englishName}}</v-chip>
+        </span>-->
       </div>
     </div>
     <!-- <router-view/> -->

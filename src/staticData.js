@@ -2083,6 +2083,14 @@ let staticData = {
       type: "translation"
     }
   ],
+  defaultTranslation: {
+    identifier: "en.sahih",
+    language: "en",
+    name: "Saheeh International",
+    englishName: "Saheeh International",
+    format: "text",
+    type: "translation"
+  },
   translations: [
     {
       identifier: "az.mammadaliyev",
