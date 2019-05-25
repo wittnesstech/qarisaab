@@ -1,5 +1,8 @@
 <template>
-  <v-container fluid>
+  <v-container class="ma-0 pa-0">
+    <div v-if="isLoading">
+      <!-- <v-progress-linear :indeterminate="true"></v-progress-linear> -->
+    </div>
     <!-- {{getTranslationList}} -->
     <!-- <v-layout row> -->
     <!-- <v-flex> -->
@@ -55,7 +58,9 @@
       return-object
       single-line
     ></v-select>-->
-    <div v-if="isLoading">is loading</div>
+    <div v-if="isLoading">
+      <v-progress-linear :indeterminate="true"></v-progress-linear>
+    </div>
     <div v-if="!isLoading">
       <Surah :inputSurah="selectedSurah" :translationText="translationText"></Surah>
     </div>

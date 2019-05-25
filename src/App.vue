@@ -10,7 +10,7 @@
       app
     >
       <!-- <v-icon>fingerprint</v-icon> -->
-      <v-list dense class="pt-0">
+      <v-list class="pt-3 mt-5">
         <v-list-tile v-for="item in myRoutes" :key="item.name" :to="item.path">
           <v-list-tile-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -57,6 +57,13 @@ import axios from "axios";
 import "vue-swatches/dist/vue-swatches.min.css";
 import FlagIcon from "vue-flag-icon";
 Vue.use(FlagIcon);
+
+import "@fortawesome/fontawesome-free/css/all.css"; // Ensure you are using css-loader
+import Vuetify from "vuetify";
+
+Vue.use(Vuetify, {
+  iconfont: "fa"
+});
 // import Router from "vue-router";
 // Object.defineProperty(Vue.prototype, "$Matter", { value: Matter });
 Object.defineProperty(Vue.prototype, "$axios", { value: axios });
@@ -87,7 +94,7 @@ export default {
 </script>
 <style scoped>
 #drawer {
-  margin-top: 64px !important;
+  /* margin-top: 64px !important; */
   text-transform: capitalize;
 }
 </style>
