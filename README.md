@@ -10,7 +10,7 @@ Here we _GO_
 
 Hosted version of the app is available at [Qari Saab][hostedlink]
 
-We are also on [npm][npmqarisaab]
+Also on [npm][npmqarisaab]
 
 ### TODOs
 
@@ -18,39 +18,30 @@ We are also on [npm][npmqarisaab]
 
 ##### Display
 
-- [ ] country / language flags are pathat... needs changing
-
-- [x] Add [Vue][vuelink] framework
-- [x] Better UI based on [Vuetify][vuetifylink]
+- [ ] translation selector needs improvement
+- [ ] Map of Quran
+- ~~[x] Add [Vue][vuelink] framework~~
+- ~~[x] Better UI based on [Vuetify][vuetifylink]~~
 
 #### Functionaliity
 
-- [ ] Add Facebook Login feature
-- [ ] Add Persistance via _Firebase Database..?_
-- [ ] Reset / Reload button or something
-- [ ] SOUND
-- [ ] Multi-lingual stuff is required (Google translate **API** ?)
-
-#### p5 Canvas
-
-- [ ] FG & BG colors suck
-- [ ] Font size relatively small
-- [ ] The string are less physics-sy
-- [ ] Click to do something _Interactively_
-- [x] **Draggable** canvas
-  - [ ] Fix the draggable problem.... mousex || m.x
-- [ ] Selectable surahs / ayahs (need more _ideas_)
-- [ ] Long and short ayahs / relative words as to screen size - Why not use scrollview?
-- [ ] Beads need to engulf the word completely and go invisible soon
+- [ ] Social login (facebook, twitter, ...)
+- [ ] Firebase app
+- [ ] Sound / Qirat
+- [x] [PouchDB][pouchdb] integrated as a clientside DB (syncs to [CouchDB][couchdb] cloud)
+- [x] ~~Reset / Reload button or something~~ design changed
+- [x] ~~Multi-lingual stuff is required (Google translate **API** ?)~~ Translations cover this part
 
 #### Misc
 
-- [x] Need to add versioning system
-- [x] Publish to [NPM][npmqarisaab]
+- ~~[x] Need to add versioning system~~
+- ~~[x] Publish to [NPM][npmqarisaab]~~
 
-> **PS:** Markdown is _sleek,_ so here's a quick [**Cheat Sheet**](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and [this guy](https://www.toptal.com/web/markdown-the-writing-tool-for-software-developers) explains why we need to learn this =>
+> **PS:** Markdown [**Cheat Sheet**](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) =>
 
 [hostedlink]: http://qarisaab.surge.sh
 [vuelink]: https://github.com/vuejs/vue
 [vuetifylink]: https://github.com/vuetifyjs/vuetify
 [npmqarisaab]: https://www.npmjs.com/package/qarisaab
+[pouchdb]: https://pouchdb.com/
+[couchdb]: http://couchdb.apache.org/
