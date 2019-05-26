@@ -70,7 +70,7 @@ export default {
     this.filteredList = this.list.filter(function(x) {
       return x.type === "translation";
     });
-    console.log("postfilter list", this.filteredList);
+    // console.log("postfilter list", this.filteredList);
     // filteredList = list;
     // console.log("created1");
   },

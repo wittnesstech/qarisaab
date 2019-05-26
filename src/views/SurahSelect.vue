@@ -2,8 +2,9 @@
   <v-container xs12>
     <!-- <flag :iso="selectedEdition.language"/> -->
     <v-select
+      solo
       @change="onSelection"
-      class="medText"
+      class="arabicText surahHeading"
       v-model="selectedSurah"
       :items="list"
       item-text="name"
@@ -39,3 +40,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.surahHeading {
+  font-size: 4em;
+}
+</style>

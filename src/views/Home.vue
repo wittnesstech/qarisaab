@@ -205,9 +205,9 @@ export default {
       }
     },
     async cacheLoader(x) {
-      const cached = await this.$resCache
-        .get(x)
-        .catch(err => console.log("cache data error :", err));
+      const cached = await this.$resCache.get(x).catch(err => {
+        // console.log("cache data error :", err);
+      });
       return cached === undefined ? false : cached;
     },
     async queryLoader(x) {
@@ -216,7 +216,9 @@ export default {
         url: x,
         // http://api.alquran.cloud/v1/edition?format=text&language=ur
         responseType: "json"
-      }).catch(err => console.log("query loading error :", err));
+      }).catch(err => {
+        // console.log("query loading error :", err);
+      });
       const data = await response.data.data;
       // console.log("query loader response:", data);
       return response === undefined ? false : data;
