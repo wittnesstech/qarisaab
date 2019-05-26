@@ -167,35 +167,66 @@ export default {
       // console.log("helper here...", Helper);
       this.isLoading = false;
     },
-    loadNewSurah() {
+    async loadNewSurah() {
       // console.log(this.$axios);
       // GET request for remote image
-      this.$axios({
-        method: "get",
-        url: "http://api.alquran.cloud/v1/surah/" + this.selectedSurah.number,
-        responseType: "json"
-      }).then(response => {
-        // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-        // console.log("surah:", response.data);
-        this.selectedSurah = response.data.data;
-        // console.log("Surah loaded : ", this.selectedSurah);
-      });
+      const queryUrl =
+        "http://api.alquran.cloud/v1/surah/" + this.selectedSurah.number;
+      // console.log("query  ", queryUrl);
+      const cachedData = await this.cacheLoader(queryUrl);
+      // console.log("cached data :", cachedData);
+      if (cachedData !== undefined && cachedData !== null && cachedData) {
+        // console.log("is true");
+        this.selectedSurah = cachedData.data;
+      } else {
+        // console.log("is false");
+        const queryResponce = await this.queryLoader(queryUrl);
+        this.selectedSurah = queryResponce;
+        this.saveCache(queryUrl, queryResponce);
+      }
     },
-    loadNewTranslation() {
-      return this.$axios({
+    async loadNewTranslation() {
+      const queryUrl =
+        "http://api.alquran.cloud/v1/surah/" +
+        this.selectedSurah.number +
+        "/" +
+        this.selectedTranslation.identifier;
+      // console.log("query  ", queryUrl);
+      const cachedData = await this.cacheLoader(queryUrl);
+      // console.log("cached data :", cachedData);
+      if (cachedData !== undefined && cachedData !== null && cachedData) {
+        // console.log("is true");
+        this.translationText = cachedData.data;
+      } else {
+        // console.log("is false");
+        const queryResponce = await this.queryLoader(queryUrl);
+        this.translationText = queryResponce;
+        this.saveCache(queryUrl, queryResponce);
+      }
+    },
+    async cacheLoader(x) {
+      const cached = await this.$resCache
+        .get(x)
+        .catch(err => console.log("cache data error :", err));
+      return cached === undefined ? false : cached;
+    },
+    async queryLoader(x) {
+      const response = await this.$axios({
         method: "get",
-        url:
-          "http://api.alquran.cloud/v1/surah/" +
-          this.selectedSurah.number +
-          "/" +
-          this.selectedTranslation.identifier,
+        url: x,
         // http://api.alquran.cloud/v1/edition?format=text&language=ur
         responseType: "json"
-      }).then(response => {
-        // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
-        this.translationText = response.data.data;
-        // console.log("translation loaded:", this.translationText);
+      }).catch(err => console.log("query loading error :", err));
+      const data = await response.data.data;
+      // console.log("query loader response:", data);
+      return response === undefined ? false : data;
+    },
+    saveCache(q, r) {
+      this.$resCache.put({
+        _id: q,
+        data: r
       });
+      // console.log("putted", q, r);
     }
   }
 };

@@ -50,6 +50,7 @@
 <script>
 import routes from "./router";
 import Vue from "vue";
+import Vuetify from "vuetify";
 // import Matter from "matter-js";
 import axios from "axios";
 // https://www.npmjs.com/package/vue-swatches
@@ -58,12 +59,18 @@ import "vue-swatches/dist/vue-swatches.min.css";
 import FlagIcon from "vue-flag-icon";
 Vue.use(FlagIcon);
 
-import "@fortawesome/fontawesome-free/css/all.css"; // Ensure you are using css-loader
-import Vuetify from "vuetify";
+// import "@fortawesome/fontawesome-free/css/all.css"; // Ensure you are using css-loader
 
 Vue.use(Vuetify, {
   iconfont: "fa"
 });
+
+import PouchDB from "pouchdb";
+// Vue.use(PouchDB);
+const resCache = new PouchDB("resCache");
+Object.defineProperty(Vue.prototype, "$resCache", { value: resCache });
+const settingsDB = new PouchDB("settingsDB");
+Object.defineProperty(Vue.prototype, "$settingsDB", { value: settingsDB });
 // import Router from "vue-router";
 // Object.defineProperty(Vue.prototype, "$Matter", { value: Matter });
 Object.defineProperty(Vue.prototype, "$axios", { value: axios });
@@ -85,6 +92,10 @@ export default {
     //   { title: "About", icon: "question_answer" }
     // ]
   }),
+  mounted: function() {
+    // console.log("app mounted :");
+    // console.log("pouch :", PouchDB);
+  },
   methods: {
     goto: pathstring => {
       this.$router.push(pathstring);
