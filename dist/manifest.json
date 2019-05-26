@@ -1,3 +1,8 @@
 {
-  "background_color": "#45025B"
+  "name": "Qari Saab",
+  "short_name": "Qari",
+  "start_url": "index.html",
+  "display": "standalone",
+  "theme_color": "#0476F2",
+  "background_color": "#fff"
 }
