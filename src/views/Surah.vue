@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="inputSurah!==null" xs12>
     <div class="slate" v-for="(ayah,index) in inputSurah.ayahs" :key="ayah.number">
-      <div class="arabicText medText">
+      <div class="arabicText medText midAlign">
         <!-- <v-icon>chevron_right</v-icon>
         {{ayah.number}}
         <v-icon>chevron_left</v-icon>-->

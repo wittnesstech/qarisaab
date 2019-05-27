@@ -3,8 +3,9 @@
     <!-- <flag :iso="selectedEdition.language"/> -->
     <v-select
       solo
+      color="purple"
       @change="onSelection"
-      class="arabicText surahHeading"
+      class="arabicText display-2 midAlign"
       v-model="selectedSurah"
       :items="list"
       item-text="name"
@@ -40,9 +41,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.surahHeading {
-  font-size: 4em;
-}
-</style>

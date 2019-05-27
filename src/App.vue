@@ -30,7 +30,7 @@
         v-if="primaryDrawer.type !== 'permanent'"
         @click.stop="primaryDrawer.model = !primaryDrawer.model"
       ></v-toolbar-side-icon>
-      <v-toolbar-title>Qari Saab</v-toolbar-title>
+      <v-toolbar-title v-ripple="{ class: `info--text` }">Qari Saab</v-toolbar-title>
     </v-toolbar>
     <v-content>
       <!-- <v-container fluid> -->

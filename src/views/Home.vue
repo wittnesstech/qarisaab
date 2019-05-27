@@ -12,19 +12,34 @@
     <!-- <br> -->
     <!-- {{fatiha}} -->
     <!-- v-for="(item, i) in 5" :key="i" -->
-    <v-layout align-center justify-space-around row>
-      <!-- <flag iso="pk"/> -->
-      <Edition
-        :list="translationList"
-        :selected="selectedTranslation"
-        @edition-selected="translationReceived"
-      ></Edition>
-      <SurahSelect
-        :list="surahList"
-        :selected="selectedSurah"
-        @surah-selected="changeSelectedSurah"
-      ></SurahSelect>
-      <!-- <v-expansion-panel popout xs6>
+    <!-- <v-layout align-center justify-space-around row> -->
+    <!-- <flag iso="pk"/> -->
+    <div class="text-xs-center">
+      <v-layout align-center row justify-space-around>
+        <SurahSelect
+          :list="surahList"
+          :selected="selectedSurah"
+          @surah-selected="changeSelectedSurah"
+        ></SurahSelect>
+      </v-layout>
+      <v-layout align-left>
+        <v-btn dark color="primary" @click="expand = !expand">></v-btn>
+
+        <v-flex shrink>
+          <v-expand-x-transition>
+            <div v-show="expand" style="white-space: nowrap">
+              <Edition
+                :list="translationList"
+                :selected="selectedTranslation"
+                @edition-selected="translationReceived"
+              ></Edition>
+            </div>
+          </v-expand-x-transition>
+        </v-flex>
+      </v-layout>
+    </div>
+
+    <!-- <v-expansion-panel popout xs6>
         <v-expansion-panel-content>
           <template v-slot:header>
             <div>Translations</div>
@@ -43,8 +58,7 @@
             <v-card-text></v-card-text>
           </v-card>
         </v-expansion-panel-content>
-      </v-expansion-panel>-->
-    </v-layout>
+    </v-expansion-panel>-->
 
     <!-- <v-select
       @change="loadNewSurah()"
@@ -89,6 +103,7 @@ export default {
     fatiha: staticData.fatiha,
     languages: staticData.languages,
     translationText: {},
+    expand: false,
     fontOptions: [
       { name: "Amiri", style: "serif" },
       { name: "Lalezar", style: "cursive" },
@@ -237,7 +252,7 @@ export default {
 <style >
 @import url("https://fonts.googleapis.com/css?family=Amiri|Katibeh|Lalezar|Lateef|Mada");
 .arabicText {
-  font-family: "Lateef", cursive;
+  font-family: "Lateef", cursive !important;
   direction: rtl;
 }
 .translation {
@@ -245,6 +260,9 @@ export default {
 }
 .slate {
   /* direction: rtl; */
+}
+.midAlign {
+  text-align: center;
 }
 
 .infoPanel {
