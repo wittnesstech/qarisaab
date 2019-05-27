@@ -4,7 +4,7 @@
     <v-select
       solo
       @change="onSelection"
-      class="arabicText surahHeading"
+      class="arabicText display-1"
       v-model="selectedSurah"
       :items="list"
       item-text="name"
@@ -35,7 +35,7 @@ export default {
   methods: {
     filterByType() {},
     onSelection() {
-      this.$emit("surah-selected", this.selectedSurah);
+      this.$emit("selected", this.selectedSurah);
     }
   }
 };

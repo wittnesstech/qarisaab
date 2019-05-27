@@ -3,61 +3,26 @@
     <div v-if="isLoading">
       <!-- <v-progress-linear :indeterminate="true"></v-progress-linear> -->
     </div>
-    <!-- {{getTranslationList}} -->
-    <!-- <v-layout row> -->
-    <!-- <v-flex> -->
-    <!-- {{computedFunc}}
-    {{alteredSurah}} = {{alteredTranslation}}-->
-    <!-- {{surahList}} -->
-    <!-- <br> -->
-    <!-- {{fatiha}} -->
-    <!-- v-for="(item, i) in 5" :key="i" -->
-    <v-layout align-center justify-space-around row>
-      <!-- <flag iso="pk"/> -->
-      <Edition
-        :list="translationList"
-        :selected="selectedTranslation"
-        @edition-selected="translationReceived"
-      ></Edition>
+    <v-layout align-center justify-space-around column>
       <SurahSelect
+        class="ma-0 pb-0"
         :list="surahList"
         :selected="selectedSurah"
-        @surah-selected="changeSelectedSurah"
+        @selected="changeSelectedSurah"
       ></SurahSelect>
-      <!-- <v-expansion-panel popout xs6>
+      <v-expansion-panel inset xs6>
         <v-expansion-panel-content>
           <template v-slot:header>
             <div>Translations</div>
           </template>
-          <v-card>
-            <v-card-text></v-card-text>
-          </v-card>
+          <EditionSelect
+            :list="editionList"
+            :selected="selectedTranslation"
+            @selected="changeSelectedEdition"
+          ></EditionSelect>
         </v-expansion-panel-content>
       </v-expansion-panel>
-      <v-expansion-panel popout xs6>
-        <v-expansion-panel-content>
-          <template v-slot:header>
-            <div>Surah</div>
-          </template>
-          <v-card>
-            <v-card-text></v-card-text>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>-->
     </v-layout>
-
-    <!-- <v-select
-      @change="loadNewSurah()"
-      class="arabicText medText"
-      v-model="selectedSurah"
-      :items="surahList"
-      item-text="name"
-      item-value="number"
-      label="Surahs"
-      persistent-hint
-      return-object
-      single-line
-    ></v-select>-->
     <div v-if="isLoading">
       <v-progress-linear :indeterminate="true"></v-progress-linear>
     </div>
@@ -73,6 +38,7 @@
 import Surah from "../views/Surah";
 import Edition from "../views/Edition";
 import SurahSelect from "../views/SurahSelect";
+import EditionSelect from "../views/EditionSelect";
 import Helper from "../lib/helper";
 import staticData from "../staticData";
 export default {
@@ -99,8 +65,9 @@ export default {
   }),
   components: {
     Surah,
+    SurahSelect,
     Edition,
-    SurahSelect
+    EditionSelect
   },
   mounted: function() {
     // console.log("ssssss", this.selectedSurah.number);
@@ -129,6 +96,9 @@ export default {
   },
   methods: {
     filterEditions() {},
+    xxxfunc() {
+      console.log("dummy func");
+    },
     translationReceived(e) {
       // console.log(Object.keys(e), e);
       //TODO Handle the edition / translation change
@@ -139,6 +109,14 @@ export default {
     },
     changeSelectedSurah(s) {
       this.selectedSurah = s;
+      // this.alteredSurah = true;
+      this.repaint();
+      // console.log("surah selected : ", this.selectedSurah);
+    },
+    changeSelectedEdition(s) {
+      this.selectedTranslation = s;
+      // this.sele
+      console.log("edition passed:", s);
       // this.alteredSurah = true;
       this.repaint();
       // console.log("surah selected : ", this.selectedSurah);
@@ -237,7 +215,7 @@ export default {
 <style >
 @import url("https://fonts.googleapis.com/css?family=Amiri|Katibeh|Lalezar|Lateef|Mada");
 .arabicText {
-  font-family: "Lateef", cursive;
+  font-family: "Lateef", cursive !important;
   direction: rtl;
 }
 .translation {

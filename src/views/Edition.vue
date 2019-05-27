@@ -11,6 +11,8 @@
     <!-- ...{{filteredList}}... -->
     <flag :iso="selectedEdition.language"/>
     <v-select
+      solo
+      flat
       v-model="selectedEdition"
       @change="onSelection"
       class="medText"
