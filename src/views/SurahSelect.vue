@@ -3,7 +3,6 @@
     <!-- <flag :iso="selectedEdition.language"/> -->
     <v-select
       solo
-      color="purple"
       @change="onSelection"
       class="arabicText display-2 midAlign"
       v-model="selectedSurah"

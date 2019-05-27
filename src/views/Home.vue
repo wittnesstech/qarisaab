@@ -14,30 +14,34 @@
     <!-- v-for="(item, i) in 5" :key="i" -->
     <!-- <v-layout align-center justify-space-around row> -->
     <!-- <flag iso="pk"/> -->
-    <div class="text-xs-center">
-      <v-layout align-center row justify-space-around>
-        <SurahSelect
-          :list="surahList"
-          :selected="selectedSurah"
-          @surah-selected="changeSelectedSurah"
-        ></SurahSelect>
-      </v-layout>
-      <v-layout align-left>
-        <v-btn dark color="primary" @click="expand = !expand">></v-btn>
-
-        <v-flex shrink>
-          <v-expand-x-transition>
-            <div v-show="expand" style="white-space: nowrap">
-              <Edition
-                :list="translationList"
-                :selected="selectedTranslation"
-                @edition-selected="translationReceived"
-              ></Edition>
-            </div>
-          </v-expand-x-transition>
-        </v-flex>
-      </v-layout>
-    </div>
+    <!-- <div class="text-xs-center"> -->
+    <v-layout align-center column>
+      <SurahSelect
+        :list="surahList"
+        :selected="selectedSurah"
+        @surah-selected="changeSelectedSurah"
+      ></SurahSelect>
+      <Edition
+        :list="translationList"
+        :selected="selectedTranslation"
+        @edition-selected="translationReceived"
+      ></Edition>
+    </v-layout>
+    <!-- <v-layout align-left> -->
+    <v-layout align-center row>
+      <v-btn icon dark @click="expand = !expand">
+        <v-icon>settings</v-icon>
+      </v-btn>
+      <!-- <v-flex shrink> -->
+      <v-expand-x-transition>
+        <div v-show="expand">
+          expanded info
+          <v-select solo></v-select>
+        </div>
+      </v-expand-x-transition>
+      <!-- </v-flex> -->
+    </v-layout>
+    <!-- </div> -->
 
     <!-- <v-expansion-panel popout xs6>
         <v-expansion-panel-content>

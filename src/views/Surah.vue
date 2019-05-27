@@ -15,7 +15,7 @@
         <!-- condition 2 -->
         <!-- TT:{{translationText}} -->
       </div>
-      <div v-else>
+      <div v-else class="midAlign">
         {{translationText.ayahs[index].text}}
         <!-- <span class="translationIdentifier ">
           <v-chip>{{translationText.edition.englishName}}</v-chip>
