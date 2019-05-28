@@ -61,9 +61,9 @@ Vue.use(FlagIcon);
 
 // import "@fortawesome/fontawesome-free/css/all.css"; // Ensure you are using css-loader
 
-Vue.use(Vuetify, {
-  iconfont: "fa"
-});
+// Vue.use(Vuetify, {
+//   iconfont: "fa"
+// });
 
 import PouchDB from "pouchdb";
 // Vue.use(PouchDB);

@@ -2,7 +2,9 @@
   <v-container xs12>
     <!-- edition :{ 
 {
-      "identifier": "ar.muyassar",
+      "identifier": "ar. id="scroll-target"
+      style="max-height: 200px"
+      class="scroll-y"muyassar",
       "language": "ar",
       "name": "تفسير المیسر",
       "englishName": "King Fahad Quran Complex",
@@ -19,25 +21,50 @@
     "versebyverse"-->
     <!--  -->
     <!-- <div v-for="type in editionTypes" :key="type"> -->
-    {{allLanguages}}:
-    <v-select v-model="allowedLangs" :items="allLanguages" label="Language Select" multiple></v-select>
-    <v-layout align-center justify-center>
-      <v-switch v-model="showTranslation" label="Translations" color="red"></v-switch>
-      <v-switch v-model="showTafsir" label="Tafsirs" color="green"></v-switch>
-      <!-- <v-switch
+    <!-- {{allLanguages}}: -->
+    <v-layout row align-center justify-space-between fill-height>
+      <v-flex>
+        <v-layout column style="max-height: 200px" class="scroll-y"></v-layout>
+        <!-- <v-select
+          xs12
+          class="ma-0 pa-0"
+          v-model="allowedLangs"
+          :items="allLanguages"
+          label="Languages"
+          multiple
+        ></v-select>-->
+      </v-flex>
+      <v-flex>
+        <v-layout align-space-between column>
+          <v-checkbox class="pa-0 ma-0" v-model="showTranslation" label="Translations"></v-checkbox>
+          <v-checkbox class="pa-0 ma-0" v-model="showTafsir" label="Tafsirs"></v-checkbox>
+          <v-checkbox class="pa-0 ma-0" v-model="showTransliteration" label="Transliterations"></v-checkbox>
+          <!-- <v-switch
         v-model="showVerseByVerse"
         :label="`Verse By Verse: ${showVerseByVerse.toString()}`"
         color="red"
-      ></v-switch>-->
-      <v-switch v-model="showTransliteration" label="Transliterations" color="blue"></v-switch>
+          ></v-switch>-->
+        </v-layout>
+      </v-flex>
     </v-layout>
     <!-- </div> -->
-    <div v-for="edition in filteredList" :key="edition.identifier">
-      <v-card @click="$emit('selected',edition)">
-        <v-card-text>{{edition}}</v-card-text>
-        {{edition.type}}
-      </v-card>
-    </div>
+    <v-layout column style="max-height: 200px" class="scroll-y">
+      <div v-for="edition in filteredList" :key="edition.identifier">
+        <v-card @click="$emit('selected',edition)">
+          <!-- <v-card-title></v-card-title> -->
+          <v-card-text>
+            <v-layout align-center row justify-space-between>
+              <span>
+                <flag :iso="edition.language"/>
+              </span>
+              <span>{{edition.name}}</span>
+              <span>{{edition.englishName}}</span>
+              <span>{{edition.type}}</span>
+            </v-layout>
+          </v-card-text>
+        </v-card>
+      </div>
+    </v-layout>
   </v-container>
 </template>
 
@@ -55,7 +82,7 @@ export default {
     showTransliteration: false,
     showVerseByVerse: false,
     allLanguages: staticData.languages,
-    allowedLangs: ["en"]
+    allowedLangs: ["en", "ur"]
     // }
     //surahList needs another component/view
     // editionList: null,
@@ -87,8 +114,11 @@ export default {
       //   ? filterList.push({ on: "type", val: "translation" })
       //   : null;
       return filtered.filter(element => {
-        return typesToFilter.find(
-          typeInFilter => typeInFilter === element.type
+        return (
+          typesToFilter.find(typeInFilter => typeInFilter === element.type) &&
+          this.allowedLangs.find(
+            langAllowed => langAllowed === element.language
+          )
         );
         // filterList.forEach(y => {
         // return x[y.on] === y.val;

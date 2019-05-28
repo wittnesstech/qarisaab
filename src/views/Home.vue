@@ -10,10 +10,11 @@
         :selected="selectedSurah"
         @selected="changeSelectedSurah"
       ></SurahSelect>
-      <v-expansion-panel inset xs6>
+      <!-- XXX:{{translationPanel}} -->
+      <v-expansion-panel v-model="translationPanel" inset xs6>
         <v-expansion-panel-content>
           <template v-slot:header>
-            <div>Translations</div>
+            <div>Translation : {{selectedTranslation.englishName}}</div>
           </template>
           <EditionSelect
             :list="editionList"
@@ -54,6 +55,7 @@ export default {
     alteredTranslation: true,
     fatiha: staticData.fatiha,
     languages: staticData.languages,
+    translationPanel: 0,
     translationText: {},
     fontOptions: [
       { name: "Amiri", style: "serif" },
@@ -117,6 +119,7 @@ export default {
       this.selectedTranslation = s;
       // this.sele
       console.log("edition passed:", s);
+      this.translationPanel = 1;
       // this.alteredSurah = true;
       this.repaint();
       // console.log("surah selected : ", this.selectedSurah);
@@ -244,6 +247,11 @@ export default {
 
 .smallText {
   font-size: 1em;
+}
+.bordered {
+  outline-style: auto;
+  outline-color: chartreuse;
+  outline-width: 5px;
 }
 </style>
 
