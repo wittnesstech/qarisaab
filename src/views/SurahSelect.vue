@@ -4,12 +4,13 @@
     <v-select
       solo
       @change="onSelection"
-      class="arabicText display-1"
+      class="arabicText display-1 centerText"
       v-model="selectedSurah"
       :items="list"
       item-text="name"
       item-value="number"
       label="Surahs"
+      color="purple"
       :hint="`${selectedSurah.name} - ${selectedSurah.englishName}`"
       return-object
     ></v-select>

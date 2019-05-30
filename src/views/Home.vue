@@ -25,7 +25,7 @@
       </v-expansion-panel>
     </v-layout>
     <div v-if="isLoading">
-      <v-progress-linear :indeterminate="true"></v-progress-linear>
+      <v-progress-linear :indeterminate="true" color="purple"></v-progress-linear>
     </div>
     <div v-if="!isLoading">
       <Surah :inputSurah="selectedSurah" :translationText="translationText"></Surah>
@@ -55,7 +55,7 @@ export default {
     alteredTranslation: true,
     fatiha: staticData.fatiha,
     languages: staticData.languages,
-    translationPanel: 0,
+    translationPanel: false,
     translationText: {},
     fontOptions: [
       { name: "Amiri", style: "serif" },
@@ -217,7 +217,9 @@ export default {
 
 <style >
 @import url("https://fonts.googleapis.com/css?family=Amiri|Katibeh|Lalezar|Lateef|Mada");
-.arabicText {
+@import url("https://fonts.googleapis.com/css?family=Tajawal&display=swap");
+.arabicText,
+:lang(ar) {
   font-family: "Lateef", cursive !important;
   direction: rtl;
 }
@@ -252,6 +254,19 @@ export default {
   outline-style: auto;
   outline-color: chartreuse;
   outline-width: 5px;
+}
+:lang(zh-Hant) {
+  font-family: Kai, KaiTi, serif;
+}
+:lang(zh-Hans) {
+  font-family: DFKai-SB, BiauKai, serif;
+}
+:lang(ur) {
+  font-family: "Tajawal", serif;
+  direction: rtl;
+}
+.centertext {
+  text-align: center;
 }
 </style>
 

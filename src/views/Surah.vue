@@ -1,7 +1,7 @@
 <template>
   <v-container v-if="inputSurah!==null" xs12>
     <div class="slate" v-for="(ayah,index) in inputSurah.ayahs" :key="ayah.number">
-      <div class="arabicText medText">
+      <div lang="ar" class="medText">
         <!-- <v-icon>chevron_right</v-icon>
         {{ayah.number}}
         <v-icon>chevron_left</v-icon>-->
@@ -15,7 +15,7 @@
         <!-- condition 2 -->
         <!-- TT:{{translationText}} -->
       </div>
-      <div v-else>
+      <div v-else class="translation" :lang="translationText.edition.language">
         {{translationText.ayahs[index].text}}
         <!-- <span class="translationIdentifier ">
           <v-chip>{{translationText.edition.englishName}}</v-chip>
@@ -24,11 +24,13 @@
     </div>
     <!-- <router-view/> -->
     <div class="infoPanel">
-      <span class="number">{{inputSurah.number}}</span>
-      <span class="name arabicText smallText">{{inputSurah.name}}</span>
-      <span class="englishName">{{inputSurah.englishName}}</span>
-      <span class="revelationType">{{inputSurah.revelationType}}</span>
-      <span class="numberOfAyahs">Ayahs : {{inputSurah.numberOfAyahs}}</span>
+      <v-layout row justify-space-around>
+        <span class="number">{{inputSurah.number}}</span>
+        <span class="name arabicText smallText">{{inputSurah.name}}</span>
+        <span class="englishName">{{inputSurah.englishName}}</span>
+        <span class="revelationType">{{inputSurah.revelationType}}</span>
+        <span class="numberOfAyahs">Ayahs : {{inputSurah.numberOfAyahs}}</span>
+      </v-layout>
     </div>
     <!-- <div class="infoPanel" v-for="(item, key, index) in surah" :key="index">
             <span v-if="key!='ayahs'&& typeof(item)!='object'" :class="'info_'+key">{{key}}:{{item}}</span>
@@ -65,12 +67,16 @@ export default {
 .arabicText {
   font-family: "Lateef", cursive;
   direction: rtl;
+  text-align: center;
 }
 .translation {
+  text-align: center;
+
   /* direction: ltr !important; */
 }
 .slate {
   /* direction: rtl; */
+  text-align: center;
 }
 
 .infoPanel {
