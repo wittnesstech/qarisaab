@@ -98,4 +98,6 @@ export default {
  margin-top: 64px !important;
  text-transform: capitalize;
 }
+
+.cls-1{fill:#1697f6;}.cls-2{fill:#7bc6ff;}.cls-3 {fill:#1867c0;}.cls-4{fill:#aeddff; }
 </style>

@@ -9,7 +9,7 @@
       @mousemoved="mouseMoved"
       @mousedragged="mouseDragged"
     ></vue-p5>
-    <v-btn @click="loop=!loop">Toggle Loop</v-btn> 
+    <v-btn @click="loop=!loop">Toggle Loop</v-btn>
     <p>
       Red: {{ red }}
       <br>
@@ -39,12 +39,12 @@ import VueP5 from "vue-p5";
 import Particle from "../particle";
 
 export default {
-  name: "p5-example",
+  name: "breadBoard",
   components: {
     "vue-p5": VueP5
   },
   data: () => ({
-    loop:false,
+    loop: false,
     red: 255,
     green: 0,
     blue: 0,
@@ -105,7 +105,6 @@ export default {
     sketch(sketch) {
       // sketch.draw = () => {
       //   this.blue = (this.blue + 3) % 255;
-
       //   const { red, green, blue } = this;
       //   sketch.background(red, green, blue);
       // };
@@ -140,8 +139,8 @@ export default {
       this.Constraint = this.$Matter.Constraint;
       this.Mouse = this.$Matter.Mouse;
       this.MouseConstraint = this.$Matter.MouseConstraint;
-      console.log(this.$el.clientHeight)
-      sketch.createCanvas(this.$el.clientWidth,this.$el.clientHeight);
+      console.log(this.$el.clientHeight);
+      sketch.createCanvas(this.$el.clientWidth, this.$el.clientHeight);
       this.ayahString = this.preloaded.data.text;
       this.engine = this.Engine.create();
       this.world = this.engine.world;
@@ -159,10 +158,10 @@ export default {
       // console.log(mConstraint);
     },
     draw(sketch) {
-      const {red,green,blue}=this;
+      const { red, green, blue } = this;
       // console.log(sketch)
       const { width, height } = sketch;
-      sketch.background(red,green,blue);
+      sketch.background(red, green, blue);
       sketch.stroke(255);
       sketch.fill(100, 128, 100);
       sketch.textSize(48);

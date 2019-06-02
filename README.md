@@ -1,32 +1,28 @@
-## Qari Saab
-
-##### A `Data Visualisation` Project
+## Wittness Starter Kit
 
 ---
 
-Can we dynamically plot **Al-Quran** on a `HTML` _canvas_ using `JavaScript` _...?_
+Hosted version of the project is available at [Wittness Starter][hosted]
 
-Here we _GO_
+We are also on [npm][npmpackage]
 
-Hosted version of the app is available at [Qari Saab][hostedlink]
+### Running
 
-We are also on [npm][npmqarisaab]
+### Design
 
-### TODOs
+- [x] Add [Vue][vue] framework
+- [x] Better UI based on [Vuetify][vuetify]
 
-#### Design
-
-- [x] Add [Vue][vuelink] framework
-- [x] Better UI based on [Vuetify][vuetifylink]
-
-#### Functionaliity
+## TODOs
+### Functionaliity
 
 - [ ] Add Facebook Login feature
 - [ ] Add Persistance via _Firebase Database..?_
 - [ ] Reset / Reload button or something
 - [ ] SOUND
+- [x] Need to add versioning system
+- [x] Publish to [NPM][npmqarisaab]
 - [ ] Multi-lingual stuff is required (Google translate **API** ?)
-
 #### p5 Canvas
 
 - [ ] FG & BG colors suck
@@ -39,14 +35,14 @@ We are also on [npm][npmqarisaab]
 - [ ] Long and short ayahs / relative words as to screen size - Why not use scrollview?
 - [ ] Beads need to engulf the word completely and go invisible soon
 
-#### Misc
 
-- [x] Need to add versioning system
-- [x] Publish to [NPM][npmqarisaab]
 
-> **PS:** Markdown is _sleek,_ so here's a quick [**Cheat Sheet**](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet) and [this guy](https://www.toptal.com/web/markdown-the-writing-tool-for-software-developers) explains why we need to learn this =>
 
-[hostedlink]: http://qarisaab.surge.sh
-[vuelink]: https://github.com/vuejs/vue
-[vuetifylink]: https://github.com/vuetifyjs/vuetify
-[npmqarisaab]: https://www.npmjs.com/package/qarisaab
+---
+> **PS:** [MD Cheat Sheet][cheatsheet]  =>
+> 
+[hosted]: http://wittnessstarter.surge.sh
+[vue]: https://github.com/vuejs/vue
+[vuetify]: https://github.com/vuetifyjs/vuetify
+[npmpackage]: https://www.npmjs.com/package/qarisaab
+[cheatsheet]:https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
