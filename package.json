@@ -33,7 +33,8 @@
     "vue-p5": "^0.7.1",
     "vue-router": "^3.0.1",
     "vue-swatches": "^1.0.3",
-    "vuetify": "^1.5.5"
+    "vuetify": "^1.5.5",
+    "xlsx": "^0.14.3"
   },
   "devDependencies": {
     "@types/matter-js": "^0.10.2",
