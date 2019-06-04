@@ -4,7 +4,7 @@
     <v-flex>
       <div>testing. . .</div>
     </v-flex>
-    <xl/>
+    <xl class="bordered"/>
   </v-container>
 </template>
 
