@@ -4,34 +4,44 @@
     <v-flex>
       <div>testing. . .</div>
     </v-flex>
-    <xl class="bordered"/>
+    <xl class="bordered" @file-read="catchFile"/>
+    <v-layout row v-for="file in files" :key="file.name">
+      <dataTable :data="file"/>
+    </v-layout>
   </v-container>
 </template>
 
 <script>
 import xl from "./xl";
+import dataTable from "./dataTable";
 export default {
-  data: () => ({ files: {} }),
-  components: { xl },
+  data: () => ({ files: [] }),
+  components: { xl, dataTable },
   created: function() {},
   methods: {
-    uploaded(e) {
-      console.log("upload func e:", e);
-      console.log("upload files:", e.target.files);
-      this.files = e.target.files;
-      const reader = new FileReader();
-      reader.onload = e => console.log(e.target.result);
-      reader.readAsText(this.files[0]);
+    catchFile(f) {
+      console.log("file:", f);
+      this.files.push(f);
+      // console.log("caught file", f);
     }
   }
 };
 </script>
 
-<style scoped>
+<style >
 .bordered {
-  border-color: chartreuse;
+  border-color: ivory;
   border-width: 3px;
   border-style: inset;
+}
+.bordered-red {
+  border-color: crimson;
+}
+.bordered-green {
+  border-color: green;
+}
+.cell {
+  height: 3%;
 }
 /* @import url("https://fonts.googleapis.com/css?family=Amiri|Katibeh|Lalezar|Lateef|Mada");
 .arabicText {

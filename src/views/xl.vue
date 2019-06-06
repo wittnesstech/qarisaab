@@ -31,24 +31,41 @@
             <div>{{file.name}}</div>
           </template>
           <v-card>
-            data:{{file.data}}
-            cols:{{file.cols}}
+            <!-- data:{{file.data}} -->
+            <!-- cols:{{file.cols}} -->
             <v-card-text>
-              <div class="table-responsive">
-                <table class="table table-striped">
-                  <!-- <thead>
-                    <tr>
-                      <th v-for="c in file.cols" :key="c.key">{{c.name}}</th>
-                    </tr>
-                  </thead>-->
-                  <tbody>
-                    <tr v-for="(rowVector, key) in file.data" :key="key">
-                      <!-- <td v-for="c in file.cols" :key="c.key">{{ r[c.key] }}</td> -->
-                      <td v-for="(val,k) in rowVector" :key="k">{{val}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
+              <v-layout column class="bordered bordered-red">
+                <v-layout
+                  class="table table-striped bordered bordered-green"
+                  row
+                  align-space-between
+                  justify-space-between
+                  fill-height
+                >
+                  <v-flex
+                    xs1
+                    class="bordered bordered-green"
+                    v-for="col in file.cols"
+                    :key="col.name"
+                  >{{col}}</v-flex>
+                </v-layout>
+                <v-layout
+                  xs2
+                  class="table table-striped bordered-green bordered"
+                  row
+                  align-space-between
+                  justify-space-between
+                  fill-height
+                  v-for="(rowVector, key) in file.data"
+                  :key="key"
+                >
+                  <div
+                    class="bordered bordered-red"
+                    v-for="(value, propertyName) in rowVector"
+                    :key="propertyName"
+                  >{{value}}</div>
+                </v-layout>
+              </v-layout>
             </v-card-text>
           </v-card>
         </v-expansion-panel-content>
@@ -63,11 +80,36 @@
 <script>
 import XLSX from "xlsx";
 import { fileURLToPath } from "url";
-
+const getCols = data => {
+  let cols = [];
+  return data.reduce((col, thisRow) => {
+    // console.log("type of col", typeof col);
+    // console.log("val of col", col);
+    let rowKeys = Object.keys(thisRow);
+    // console.log("rowkeys", rowKeys);
+    let finalKeys = [];
+    for (let key of rowKeys) {
+      // console.log("key:", key);
+      // console.log("r[key]:", thisRow[key]);
+      // console.log("index result", col.indexOf(key));
+      if (col.indexOf(key) === -1) {
+        finalKeys.push(key);
+      }
+    }
+    col.push(...finalKeys);
+    return col;
+    if (typeof thisRow === Object) {
+      // console.log("inside  object if");
+      // thisRow.Object
+    } else {
+      // console.log("outside object if");
+    }
+  }, cols);
+};
 const make_cols = refstr =>
   Array(XLSX.utils.decode_range(refstr).e.c + 1)
     .fill(0)
-    .map((x, i) => ({ name: XLSX.utils.encode_col(i), key: i }));
+    .map((x, i) => ({ name: XLSX.utils.encode_col(x), key: i }));
 const _SheetJSFT = [
   "xlsx",
   "xlsb",
@@ -98,24 +140,11 @@ export default {
   data() {
     return {
       name: "xl",
-      files: [
-        {
-          name: "demo",
-          data: ["SheetJS".split(""), "1234567".split("")],
-          cols: [
-            { name: "A", key: 0 },
-            { name: "B", key: 1 },
-            { name: "C", key: 2 },
-            { name: "D", key: 3 },
-            { name: "E", key: 4 },
-            { name: "F", key: 5 },
-            { name: "G", key: 6 }
-          ]
-        }
-      ],
+      files: [],
       SheetJSFT: _SheetJSFT
     };
   },
+  computed: {},
   methods: {
     // process(f) {
     //   console.log("processing", f.name);
@@ -133,7 +162,7 @@ export default {
     },
     _change(evt) {
       const files = evt.target.files;
-      console.log("files changed . . .", files);
+      // console.log("files changed . . .", files);
       //   files.map((x, index) => this._file(x));
       for (let i = 0; i < files.length; i++) {
         if (files && files[i]) this._file(files[i]);
@@ -164,9 +193,11 @@ export default {
         // this.data = data;
         temp.data = data;
         // this.cols = make_cols(ws["!ref"]);
-        temp.cols = make_cols(ws["!ref"]);
+        temp.cols = getCols(data);
+        // console.log("gen cols", temp.cols);
         temp.name = file.name;
         this.files.push(temp);
+        this.$emit("file-read", temp);
       };
       reader.readAsBinaryString(file);
     }
