@@ -6,7 +6,7 @@
     </v-flex>
     <xl class="bordered" @file-read="catchFile"/>
     <v-layout row v-for="file in files" :key="file.name">
-      <dataTable :data="file"/>
+      <PersonBrowser :data="file"/>
     </v-layout>
   </v-container>
 </template>
@@ -14,9 +14,10 @@
 <script>
 import xl from "./xl";
 import dataTable from "./dataTable";
+import PersonBrowser from "./PersonBrowser";
 export default {
   data: () => ({ files: [] }),
-  components: { xl, dataTable },
+  components: { xl, dataTable, PersonBrowser },
   created: function() {},
   methods: {
     catchFile(f) {
