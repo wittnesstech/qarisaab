@@ -1,6 +1,6 @@
 
 <template>
-  <v-container xs12>
+  <v-container xs12 class="ma-0">
     <v-flex>
       <div>testing. . .</div>
     </v-flex>

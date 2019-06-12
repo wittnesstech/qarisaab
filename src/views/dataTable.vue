@@ -1,6 +1,9 @@
 <!-- brought to you by : https://github.com/SheetJS/js-xlsx/blob/master/demos/vue/pages/index.vue -->
 <template>
   <div>
+    <!-- {{essentialCols}} -->
+    <!-- <br> -->
+    <!-- {{generateHeaders}} -->
     <v-layout>datatable here for : {{data.name}}</v-layout>
     <v-toolbar flat color="white">
       <v-toolbar-title>My CRUD</v-toolbar-title>
@@ -57,6 +60,11 @@
         <!-- <div> -->
         <tr @click="props.expanded = !props.expanded" :key="props.index">
           <!-- {{props.index}} -->
+          <!-- <td
+            v-for="head in essentialCols"
+            :key="head.value"
+            class="text-xs-right"
+          >{{ props.item[head.value]}}</td>-->
           <td
             v-for="head in generateHeaders"
             :key="head.value"
@@ -70,7 +78,7 @@
       </template>
       <template v-slot:expand="props">
         <v-card flat>
-          <v-card-text>Peek-a-boo!</v-card-text>
+          <v-card-text>{{props.item}}</v-card-text>
         </v-card>
       </template>
       <template v-slot:no-data>
@@ -111,15 +119,43 @@ export default {
   }),
 
   computed: {
+    essentialCols() {
+      return [
+        {
+          text: "Service No",
+          value: "Svc No"
+        },
+        {
+          text: "Rank",
+          value: "Rank"
+        },
+        {
+          text: "Trade",
+          value: "Trade"
+        },
+        {
+          text: "Name",
+          value: "Name"
+        }
+      ];
+    },
     generateHeaders() {
-      return this.data.cols.map(x => {
-        return {
-          text: x,
-          // align: "left",
-          // sortable: false,
-          value: x
-        };
-      });
+      let essentials = this.essentialCols.map(c => c.value);
+      console.log("essentials:", essentials);
+      let headers = this.data.cols
+        .filter(x => {
+          console.log("filter : ", x, "->", essentials.indexOf(x) !== -1);
+          return essentials.indexOf(x) === -1;
+        })
+        .map(x => {
+          return {
+            text: x,
+            // align: "left",
+            // sortable: false,
+            value: x
+          };
+        });
+      return [...this.essentialCols, ...headers];
     },
     formTitle() {
       return this.editedIndex === -1 ? "New Item" : "Edit Item";

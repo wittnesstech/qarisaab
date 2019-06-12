@@ -33,12 +33,12 @@
       <v-toolbar-title>Qari Saab</v-toolbar-title>
     </v-toolbar>
     <v-content>
-      <v-container fluid>
-        <v-layout align-center justify-center>
-          <v-flex xs10>
-            <router-view/>
-          </v-flex>
-        </v-layout>
+      <v-container fluid class="pa-0 ma-0">
+        <!-- <v-layout align-center justify-center> -->
+        <!-- <v-flex xs10> -->
+        <router-view/>
+        <!-- </v-flex> -->
+        <!-- </v-layout> -->
       </v-container>
     </v-content>
     <v-footer :inset="true" app>

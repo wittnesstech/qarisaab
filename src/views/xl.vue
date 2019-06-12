@@ -93,17 +93,14 @@ const getCols = data => {
       // console.log("r[key]:", thisRow[key]);
       // console.log("index result", col.indexOf(key));
       if (col.indexOf(key) === -1) {
+        // ? typeof thisRow === Object
         finalKeys.push(key);
+        // console.log("inside  object if");
       }
+      // console.log("outside object if");
     }
     col.push(...finalKeys);
     return col;
-    if (typeof thisRow === Object) {
-      // console.log("inside  object if");
-      // thisRow.Object
-    } else {
-      // console.log("outside object if");
-    }
   }, cols);
 };
 const make_cols = refstr =>
