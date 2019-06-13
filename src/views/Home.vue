@@ -1,12 +1,13 @@
 
 <template>
   <v-container xs12 class="ma-0">
+    <PersonBrowser/>
     <v-flex>
       <div>testing. . .</div>
     </v-flex>
     <xl class="bordered" @file-read="catchFile"/>
     <v-layout row v-for="file in files" :key="file.name">
-      <PersonBrowser :data="file"/>
+      <PersonBrowser :data="file.data"/>
     </v-layout>
   </v-container>
 </template>

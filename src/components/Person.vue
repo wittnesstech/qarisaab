@@ -12,11 +12,11 @@
             justify-space-between
             fill-height
           >
-            <v-flex class="bordered bordered-green">
+            <v-flex xs2 class="bordered bordered-green">
               <img src="/assets/Ranks/ranks.png" class="profilePic">
             </v-flex>
             <v-layout column justify-end class="bordered bordered-green">
-              <v-flex>
+              <v-flex xs12>
                 <p>
                   <v-chip small color="green "># {{profileData['Svc No']}}</v-chip>
                   <v-icon>home</v-icon>
@@ -28,7 +28,8 @@
                   Coy
                 </p>
               </v-flex>
-              <v-layout row class="bordered bordered-red">
+              <v-layout wrap class="bordered bordered-red">
+                  Unknown Data:
                 <v-flex
                   v-for="(val,keyName) in filteredProfileData"
                   :key="keyName"

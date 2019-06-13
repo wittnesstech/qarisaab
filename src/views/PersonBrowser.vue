@@ -1,84 +1,75 @@
 <!-- brought to you by : https://github.com/SheetJS/js-xlsx/blob/master/demos/vue/pages/index.vue -->
 <template>
-  <div>
-    <!-- {{essentialCols}} -->
-    <!-- <br> -->
-    <!-- {{generateHeaders}} -->
-    <v-layout>Person Browser here for : {{data.name}}</v-layout>
-    <!-- <v-toolbar flat color="white">
-      <v-toolbar-title>My CRUD</v-toolbar-title>
-      <v-divider class="mx-2" inset vertical></v-divider>
-      <v-spacer></v-spacer>
-      <v-dialog v-model="dialog" max-width="500px">
-        <template v-slot:activator="{ on }">
-          <v-btn color="primary" dark class="mb-2" v-on="on">New Item</v-btn>
+  <v-layout class="bordered bordered-green">
+    <v-flex xs12>
+      <!-- {{data}}
+      {{dataStash}}-->
+      <!-- <div class="bordered pa-0 ma-0"> -->
+      <!-- {{essentialCols}}xxx -->
+      <v-card>
+        <v-card-title>
+          <span class="headline">{{ formTitle }}</span>
+        </v-card-title>
+
+        <v-card-text>
+          <v-container grid-list-md class="pa-0 ma-0">
+            <v-layout row>
+              <v-text-field hint="lllllll" v-model="editedItem['Svc No']" label="Svc No"></v-text-field>
+              <v-text-field hint="lllllll" v-model="editedItem.Rank" label="Rank"></v-text-field>
+              <v-text-field hint="lllllll" v-model="editedItem.Trade" label="Trade"></v-text-field>
+              <v-text-field hint="lllllll" v-model="editedItem.Name" label="Name"></v-text-field>
+              <!-- <v-flex xs6 sm6 md3>
+                </v-flex>
+                <v-flex xs6 sm6 md3>
+              </v-flex>-->
+            </v-layout>
+          </v-container>
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
+          <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
+        </v-card-actions>
+      </v-card>
+      <!-- {{generateHeaders}} -->
+      <!-- </div> -->
+      <!-- <div v-if="data!==undefined"> -->
+      <!-- <v-layout>Person Browser here for : {{data.name}}</v-layout> -->
+      <v-data-table
+        :headers="essentialCols"
+        :items="dataStash"
+        item-key="Ser"
+        class="elevation-1"
+        :expand="expand"
+      >
+        <template v-slot:items="props">
+          <tr @click="props.expanded = !props.expanded" :key="props.index">
+            <td
+              v-for="head in essentialCols"
+              :key="head.value"
+              :class="head.class"
+            >{{ props.item[head.value]}}</td>
+          </tr>
         </template>
-        <v-card>
-          <v-card-title>
-            <span class="headline">{{ formTitle }}</span>
-          </v-card-title>
-
-          <v-card-text>
-            <v-container grid-list-md>
-              <v-layout wrap>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.name" label="Dessert name"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.calories" label="Calories"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.fat" label="Fat (g)"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.carbs" label="Carbs (g)"></v-text-field>
-                </v-flex>
-                <v-flex xs12 sm6 md4>
-                  <v-text-field v-model="editedItem.protein" label="Protein (g)"></v-text-field>
-                </v-flex>
-              </v-layout>
-            </v-container>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" flat @click="close">Cancel</v-btn>
-            <v-btn color="blue darken-1" flat @click="save">Save</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-dialog>
-    </v-toolbar>-->
-    <v-data-table
-      :headers="essentialCols"
-      :items="data.data"
-      item-key="Ser"
-      class="elevation-1"
-      :expand="expand"
-    >
-      <template v-slot:items="props">
-        <tr @click="props.expanded = !props.expanded" :key="props.index">
-          <td
-            v-for="head in essentialCols"
-            :key="head.value"
-            :class="head.class"
-          >{{ props.item[head.value]}}</td>
-        </tr>
-      </template>
-      <template v-slot:expand="props">
-        <Person :profileData="props.item"/>
-      </template>
-      <template v-slot:no-data>
-        oye hoyee
-        <v-btn color="primary" @click="initialize">Reset</v-btn>
-      </template>
-    </v-data-table>
-  </div>
+        <template v-slot:expand="props">
+          <Person :profileData="props.item"/>
+        </template>
+        <template class="red" v-slot:no-data>
+          <v-flex class="bordered bordered-red">No Data !</v-flex>
+          <!-- <v-btn color="primary" @click="initialize">Reset</v-btn> -->
+        </template>
+      </v-data-table>
+      <!-- </div> -->
+    </v-flex>
+  </v-layout>
 </template>
 
 <script>
 import XLSX from "xlsx";
 import { fileURLToPath } from "url";
 import Person from "../components/Person";
+import PouchDB from "pouchdb";
 
 export default {
   props: ["data"],
@@ -89,23 +80,34 @@ export default {
     files: [],
     dialog: false,
     headers: [],
-    desserts: [],
-    editedIndex: -1,
+    dataStash: [],
     editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
+      "Svc No": undefined,
+      Name: undefined,
+      Rank: undefined,
+      Trade: undefined
     },
     defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
+      "Svc No": undefined,
+      Name: undefined,
+      Rank: undefined,
+      Trade: undefined
     }
   }),
+  created() {
+    if (this.data !== undefined) {
+      this.dataStash = this.data;
+      console.log("data passed and assigned", this.dataStash);
+    } else console.log("data ?", this.data);
+    // Object.defineProperty(Vue.prototype, "$pouchDb", { value: PouchDB });
+    // const resCache = new PouchDB("resCache");//response cache for http requests... ugh
+
+    // let db = new PouchDB("test");
+    // console.log(db);
+    // db.post("hiiiii");
+    // console.log(db.get(x => console.log("xxx", x)));
+    this.initialize();
+  },
 
   computed: {
     essentialCols() {
@@ -167,40 +169,36 @@ export default {
     }
   },
 
-  created() {
-    this.initialize();
-  },
-
   methods: {
     initialize() {
-      this.desserts = [];
+      // this.dataStash = [];
     },
 
     editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item);
+      this.editedIndex = this.dataStash.indexOf(item);
       this.editedItem = Object.assign({}, item);
-      this.dialog = true;
+      // this.dialog = true;
     },
 
     deleteItem(item) {
-      const index = this.desserts.indexOf(item);
+      const index = this.dataStash.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
-        this.desserts.splice(index, 1);
+        this.dataStash.splice(index, 1);
     },
 
     close() {
-      this.dialog = false;
+      // this.dialog = false;
       setTimeout(() => {
         this.editedItem = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
-      }, 300);
+      }, 700);
     },
 
     save() {
       if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+        Object.assign(this.dataStash[this.editedIndex], this.editedItem);
       } else {
-        this.desserts.push(this.editedItem);
+        this.dataStash.push(this.editedItem);
       }
       this.close();
     }
