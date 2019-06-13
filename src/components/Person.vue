@@ -1,112 +1,88 @@
 <!-- brought to you by : https://github.com/SheetJS/js-xlsx/blob/master/demos/vue/pages/index.vue -->
 <template>
   <div class="bordered" @drop="_drop" @dragenter="_suppress" @dragover="_suppress">
-    <!-- <div class="row">
-      <div class="col-xs-12">
-        <form class="form-inline">
-          <div class="form-group">
-            <label for="file">Spreadsheet</label>
-            <input
-              type="file"
-              multiple
-              class="form-control"
-              id="file"
-              :accept="SheetJSFT"
-              @change="_change"
-            >
-          </div>
-        </form>
-      </div>
-    </div>-->
-    <!-- <div class="row"> -->
-    <!-- <div class="col-xs-12"> -->
-    <!-- :disabled="data.length ? false : true" -->
-    <!-- <button class="btn btn-success" @click="_export">Export</button> -->
-    <!-- </div> -->
-    <!-- </div> -->
-    <div class="row">
-      <v-expansion-panel>
-        <v-expansion-panel-content>
-          <template v-slot:header>
-            <div>
-              <v-card>
-                <!-- data:{{file.data}} -->
-                <!-- cols:{{file.cols}} -->
-                <v-card-text>
-                  <v-layout column class="bordered bordered-red">
-                    <v-layout
-                      class="table table-striped bordered bordered-green"
-                      row
-                      align-space-between
-                      justify-space-between
-                      fill-height
-                    >
-                      <v-flex xs1 class="bordered bordered-green">xxx</v-flex>
-                    </v-layout>
-                    <v-layout
-                      xs2
-                      class="table table-striped bordered-green bordered"
-                      row
-                      align-space-between
-                      justify-space-between
-                      fill-height
-                    >
-                      <div class="bordered bordered-red">xxx</div>
-                    </v-layout>
-                  </v-layout>
-                </v-card-text>
-              </v-card>
-            </div>
-          </template>
-          <v-card>
-            <!-- data:{{file.data}} -->
-            <!-- cols:{{file.cols}} -->
-            <v-card-text>
-              <v-layout column class="bordered bordered-red">
-                <v-layout
-                  class="table table-striped bordered bordered-green"
-                  row
-                  align-space-between
-                  justify-space-between
-                  fill-height
+    <!-- {{filteredProfileData}} -->
+    <v-expansion-panel>
+      <v-expansion-panel-content>
+        <template v-slot:header>
+          <v-layout
+            class="table table-striped bordered"
+            row
+            align-space-between
+            justify-space-between
+            fill-height
+          >
+            <v-flex class="bordered bordered-green">
+              <img src="/assets/Ranks/ranks.png" class="profilePic">
+            </v-flex>
+            <v-layout column justify-end class="bordered bordered-green">
+              <v-flex>
+                <p>
+                  <v-chip small color="green "># {{profileData['Svc No']}}</v-chip>
+                  <v-icon>home</v-icon>
+                  {{profileData.Rank}}
+                  <span class="trade">({{profileData.Trade}})</span>
+                  <strong>{{profileData.Name}}</strong>
+                  of
+                  {{profileData.Coy}}
+                  Coy
+                </p>
+              </v-flex>
+              <v-layout row class="bordered bordered-red">
+                <v-flex
+                  v-for="(val,keyName) in filteredProfileData"
+                  :key="keyName"
+                  class="bordered bordered-green"
                 >
-                  <v-flex xs1 class="bordered bordered-green">xxx</v-flex>
-                </v-layout>
-                <v-layout
-                  xs2
-                  class="table table-striped bordered-green bordered"
-                  row
-                  align-space-between
-                  justify-space-between
-                  fill-height
-                >
-                  <div class="bordered bordered-red">xxx</div>
-                </v-layout>
+                  <FieldView class="bordered" :fieldVal="val" :type="keyName"/>
+                </v-flex>
               </v-layout>
-            </v-card-text>
-          </v-card>
-        </v-expansion-panel-content>
-      </v-expansion-panel>
-      <!-- <div>
-        <v-btn class="info" @click.prevent="process(file)">Load</v-btn>
-      </div>-->
-    </div>
+            </v-layout>
+          </v-layout>
+        </template>
+        <v-flex xs12 class="bordered bordered-green">{{profileData}}</v-flex>
+      </v-expansion-panel-content>
+    </v-expansion-panel>
   </div>
 </template>
 
 <script>
 // import XLSX from "xlsx";
 // import { fileURLToPath } from "url";
-
+import FieldView from "./FieldView";
 export default {
   data() {
     return {
       // name: "xl",
       files: []
+      // rankSheet: "../assets/Ranks/ranks.png"
     };
   },
+  components: { FieldView },
   props: ["profileData"],
-  computed: {},
+  computed: {
+    filteredProfileData() {
+      let pData = Object.assign({}, this.profileData);
+      let filtered = [];
+      for (let profile in pData) {
+        if (
+          profile === "Rank" ||
+          profile === "Name" ||
+          profile === "Coy" ||
+          profile === "Ser" ||
+          profile === "Trade" ||
+          profile === "Svc No"
+        ) {
+          // let temp = { profile: pData[profile] };
+
+          // filtered.push(temp);
+          delete pData[profile];
+        }
+        // console.log(profile, pData[profile]);
+      }
+      return pData;
+    }
+  },
   methods: {
     // process(f) {
     //   console.log("processing", f.name);
@@ -141,3 +117,14 @@ export default {
   }
 };
 </script>
+<style scoped>
+.profilePic {
+  width: 125px;
+  height: 140px;
+}
+.trade {
+  border: 1.5px;
+  border-style: dashed;
+  border-color: lawngreen;
+}
+</style>

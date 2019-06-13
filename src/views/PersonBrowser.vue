@@ -5,7 +5,7 @@
     <!-- <br> -->
     <!-- {{generateHeaders}} -->
     <v-layout>Person Browser here for : {{data.name}}</v-layout>
-    <v-toolbar flat color="white">
+    <!-- <v-toolbar flat color="white">
       <v-toolbar-title>My CRUD</v-toolbar-title>
       <v-divider class="mx-2" inset vertical></v-divider>
       <v-spacer></v-spacer>
@@ -47,42 +47,28 @@
           </v-card-actions>
         </v-card>
       </v-dialog>
-    </v-toolbar>
+    </v-toolbar>-->
     <v-data-table
-      :headers="generateHeaders"
+      :headers="essentialCols"
       :items="data.data"
       item-key="Ser"
       class="elevation-1"
       :expand="expand"
     >
       <template v-slot:items="props">
-        <!-- <td :v-for="obj in props">{{ obj }}</td> -->
-        <!-- <div> -->
         <tr @click="props.expanded = !props.expanded" :key="props.index">
-          <!-- {{props.index}} -->
-          <!-- <td
+          <td
             v-for="head in essentialCols"
             :key="head.value"
-            class="text-xs-right"
-          >{{ props.item[head.value]}}</td>-->
-          <td
-            v-for="head in generateHeaders"
-            :key="head.value"
-            class="text-xs-right"
+            :class="head.class"
           >{{ props.item[head.value]}}</td>
-          <!-- <td class="justify-center layout px-0">{{props.item.Name}}</td> -->
-          <!-- <v-icon small class="mr-2" @click="editItem(props.item)">edit</v-icon> -->
-          <!-- <v-icon small @click="deleteItem(props.item)">delete</v-icon> -->
-          <!-- </div> -->
         </tr>
       </template>
       <template v-slot:expand="props">
         <Person :profileData="props.item"/>
-        <v-card flat>
-          <v-card-text>{{props.item}}</v-card-text>
-        </v-card>
       </template>
       <template v-slot:no-data>
+        oye hoyee
         <v-btn color="primary" @click="initialize">Reset</v-btn>
       </template>
     </v-data-table>
@@ -124,21 +110,31 @@ export default {
   computed: {
     essentialCols() {
       return [
+        //TODO image/photo in DB...?
+        // {
+        //   text: "Photo",
+        //   // value: "Svc No",
+        //   class: "text-xs-left"
+        // },
         {
           text: "Service No",
-          value: "Svc No"
+          value: "Svc No",
+          class: "text-xs-left"
         },
         {
           text: "Rank",
-          value: "Rank"
+          value: "Rank",
+          class: "text-xs-center"
         },
         {
           text: "Trade",
-          value: "Trade"
+          value: "Trade",
+          class: "text-xs-left"
         },
         {
           text: "Name",
-          value: "Name"
+          value: "Name",
+          class: "text-xs-left"
         }
       ];
     },
@@ -210,4 +206,9 @@ export default {
     }
   }
 };
-</script>
+</script><style scoped>
+.profilePic {
+  width: 125px;
+  height: 140px;
+}
+</style>
