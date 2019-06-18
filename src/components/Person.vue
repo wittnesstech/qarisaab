@@ -70,7 +70,7 @@ export default {
           profile === "Rank" ||
           profile === "Name" ||
           profile === "Coy" ||
-          profile === "Ser" ||
+          // profile === "Ser" ||
           profile === "Trade" ||
           profile === "Svc No"
         ) {
