@@ -1,6 +1,6 @@
 <!-- brought to you by : https://github.com/SheetJS/js-xlsx/blob/master/demos/vue/pages/index.vue -->
 <template>
-  <v-layout class="bordered bordered-green">
+  <v-layout class>
     <v-flex xs12>
       <!-- {{data}}
       {{dataStash}}-->
@@ -53,7 +53,7 @@
           </tr>
         </template>
         <template v-slot:expand="props">
-          <Person :profileData="props.item"/>
+          <Person class="bordered bordered-green" :profileData="props.item"/>
         </template>
         <template class="red" v-slot:no-data>
           <v-flex class="bordered bordered-red">No Data !</v-flex>

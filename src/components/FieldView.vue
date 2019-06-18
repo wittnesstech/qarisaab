@@ -1,11 +1,14 @@
 <!-- brought to you by : https://github.com/SheetJS/js-xlsx/blob/master/demos/vue/pages/index.vue -->
 <template>
-  <v-layout>
+  <v-flex xs3>
     <!-- <v-chip small> -->
     <!-- <v-icon>refresh</v-icon> -->
-    <span>{{type}}:{{fieldVal}}</span>
+    <span>
+      <v-chip small :draggable="fieldVal" @dragenter="dragger">{{type}}</v-chip>
+      {{fieldVal}}
+    </span>
     <!-- </v-chip> -->
-  </v-layout>
+  </v-flex>
 </template>
 <script>
 export default {
@@ -14,7 +17,11 @@ export default {
   },
   props: ["fieldVal", "type"],
   computed: {},
-  methods: {}
+  methods: {
+    dragger(item) {
+      console.log("dragger..", item);
+    }
+  }
 };
 </script>
 <style scoped>
