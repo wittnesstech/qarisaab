@@ -9,7 +9,7 @@ export default {
     async populateEditionList() {
       const response = await axios({
         method: "get",
-        url: "http://api.alquran.cloud/v1/edition",
+        url: "https://api.alquran.cloud/v1/edition",
         responseType: "json"
       });
       // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))
@@ -20,7 +20,7 @@ export default {
     async populateSurahList() {
       const response = await axios({
         method: "get",
-        url: "http://api.alquran.cloud/v1/surah",
+        url: "https://api.alquran.cloud/v1/surah",
         responseType: "json"
       });
       // response.data.pipe(fs.createWriteStream('ada_lovelace.jpg'))

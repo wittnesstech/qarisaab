@@ -152,7 +152,7 @@ export default {
       // console.log(this.$axios);
       // GET request for remote image
       const queryUrl =
-        "http://api.alquran.cloud/v1/surah/" + this.selectedSurah.number;
+        "https://api.alquran.cloud/v1/surah/" + this.selectedSurah.number;
       // console.log("query  ", queryUrl);
       const cachedData = await this.cacheLoader(queryUrl);
       // console.log("cached data :", cachedData);
@@ -168,7 +168,7 @@ export default {
     },
     async loadNewTranslation() {
       const queryUrl =
-        "http://api.alquran.cloud/v1/surah/" +
+        "https://api.alquran.cloud/v1/surah/" +
         this.selectedSurah.number +
         "/" +
         this.selectedTranslation.identifier;
