@@ -1,47 +1,84 @@
 <!-- brought to you by : https://github.com/SheetJS/js-xlsx/blob/master/demos/vue/pages/index.vue -->
 <template>
-  <div class="bordered" @drop="_drop" @dragenter="_suppress" @dragover="_suppress">
+  <div class="ma-0 pa-0" @drop="_drop" @dragenter="_suppress" @dragover="_suppress">
     <!-- {{filteredProfileData}} -->
+    <!-- {{infoGroups}} -->
     <v-expansion-panel>
       <v-expansion-panel-content>
         <template v-slot:header>
-          <v-layout
-            class="table table-striped bordered"
-            row
-            align-space-between
-            justify-space-between
-            fill-height
-          >
-            <v-flex xs2 class="bordered bordered-green">
-              <img src="/assets/Ranks/ranks.png" class="profilePic">
+          <v-layout class="table table-striped" row align-center justify-start>
+            <!-- <v-layout class justify-space-between align-center> -->
+            <img src="/assets/Ranks/ranks.png" class="profilePic">
+            <v-flex class="bordered bordered-green ma-0 pa-0">
+              <!-- <v-flex class="ma-0 pa-0"> -->
+              <!-- <div id="personSummary" class="bordered"> -->
+              <!-- <p> -->
+              <v-chip small color="green "># {{profileData['Svc No']}}</v-chip>
+              <v-icon>home</v-icon>
+              {{profileData.Rank}}
+              <span class="trade">({{profileData.Trade}})</span>
+              <strong>{{profileData.Name}}</strong>
+              <span>of</span>
+              {{profileData.Coy}}
+              Coy
+              <!-- </p> -->
+              <!-- </v-flex> -->
             </v-flex>
-            <v-layout column justify-end class="bordered bordered-green">
-              <v-flex xs12>
-                <p>
-                  <v-chip small color="green "># {{profileData['Svc No']}}</v-chip>
-                  <v-icon>home</v-icon>
-                  {{profileData.Rank}}
-                  <span class="trade">({{profileData.Trade}})</span>
-                  <strong>{{profileData.Name}}</strong>
-                  of
-                  {{profileData.Coy}}
-                  Coy
-                </p>
-              </v-flex>
-              <v-layout wrap class="bordered bordered-red">
-                  Unknown Data:
-                <v-flex
-                  v-for="(val,keyName) in filteredProfileData"
-                  :key="keyName"
-                  class="bordered bordered-green"
-                >
-                  <FieldView class="bordered" :fieldVal="val" :type="keyName"/>
-                </v-flex>
-              </v-layout>
-            </v-layout>
+            <!-- </v-layout> -->
           </v-layout>
         </template>
-        <v-flex xs12 class="bordered bordered-green">{{profileData}}</v-flex>
+        <v-flex xs12 class="bordered bordered-red ma-0 pa-0">
+          <v-layout column justify-end class>
+            <v-layout
+              row
+              class="ma-0 pa-0"
+              align-center
+              fill-height
+              v-for="group in infoGroups"
+              :key="group.title"
+            >
+              <!-- </div> -->
+              <v-flex xs2 class="bordered bordered-green" align-center justify-end>
+                <!-- <span class="ma-0 pa-0">Title:{{group.title}}</span> -->
+
+                <v-checkbox
+                  color="info"
+                  :label="group.title"
+                  class="ma-0 pa-0"
+                  v-model="group.isVisible"
+                ></v-checkbox>
+              </v-flex>
+              <!-- <v-layout row class="bordered" align-start> -->
+              <!-- Val:{{group.isVisible}} -->
+              <!-- <v-layout column> -->
+              <v-flex xs10 class="ma-0 pa-0">
+                <div id="backgroundInfo" class="ma-0 pa-0" :hidden="!group.isVisible">
+                  <v-layout wrap class="ma-0 pa-0">
+                    <v-flex class="ma-0 pa-0" v-for="field in group.members" :key="field">
+                      <!-- <p
+                      class="ma-0 pa-0"
+                      >{{field}} : {{profileData[field]?profileData[field]:'No Data'}}</p>-->
+                      <FieldView
+                        class="ma-0 pa-0"
+                        :fieldVal="profileData[field]?profileData[field]:'No Data'"
+                        :type="field"
+                      />
+                    </v-flex>
+                  </v-layout>
+                </div>
+              </v-flex>
+              <!-- </v-layout> -->
+              <!-- </v-layout> -->
+            </v-layout>
+            <!-- <v-layout wrap align-center justify-space-around class="bordered bordered-red">
+              Unknown Data:
+              <div v-for="(val,keyName) in filteredProfileData" :key="keyName" class="bordered">
+                <FieldView :fieldVal="val" :type="keyName"/>
+              </div>
+            </v-layout>-->
+          </v-layout>
+        </v-flex>
+        <!-- <v-flex xs12 class="bordered bordered-green">{{profileData}}</v-flex> -->
       </v-expansion-panel-content>
     </v-expansion-panel>
   </div>
@@ -55,7 +92,64 @@ export default {
   data() {
     return {
       // name: "xl",
-      files: []
+      files: [],
+      infoGroups: [
+        {
+          title: "Id",
+          members: ["Rank", "Name", "Coy", "Trade", "Svc No", "Disposal"],
+          isVisible: true
+        },
+        {
+          title: "BackGround",
+          members: [
+            "Ser",
+            "Father's Name",
+            "CNIC",
+            "DoB",
+            "Sectt",
+            "Caste",
+            "Vill",
+            "Cl"
+          ],
+          isVisible: true
+        },
+        {
+          title: "Misc",
+          members: [
+            "Med Cat",
+            "Red Ink Entries",
+            "DoPresentRank",
+            "DoPostingIn"
+          ],
+          isVisible: true
+        },
+        {
+          title: "Qual",
+          members: [
+            "Civ",
+            "AEC",
+            "Eng",
+            "MR",
+            "PC1",
+            "PC2",
+            "PC3",
+            "TC1",
+            "TC2"
+          ],
+          isVisible: true
+        },
+        {
+          title: "Courses",
+          members: ["JNC", "BCC", "JLC", "ALC", "FOS"],
+          isVisible: true
+        },
+        {
+          title: "Security Cl",
+          members: ["Found", "Auth", "DoAuth", "DoReInitiation"],
+          isVisible: true
+        }
+      ]
+
       // rankSheet: "../assets/Ranks/ranks.png"
     };
   },
@@ -125,7 +219,7 @@ export default {
 }
 .trade {
   border: 1.5px;
-  border-style: dashed;
-  border-color: lawngreen;
+  /* border-style: dashed; */
+  /* border-color: lawngreen; */
 }
 </style>

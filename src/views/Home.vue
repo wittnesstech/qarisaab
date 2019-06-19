@@ -1,12 +1,17 @@
 
 <template>
   <v-container xs12 class="ma-0">
-    <PersonBrowser/>
+    <!-- <PersonBrowser/> -->
     <v-flex>
       <div>testing. . .</div>
     </v-flex>
     <xl class="bordered" @file-read="catchFile"/>
-    <v-layout row v-for="file in files" :key="file.name">
+    <v-layout column v-for="file in files" :key="file.name">
+      <v-layout column v-for="entry in file.data" :key="entry.Ser">
+        <v-flex xs12>
+          <!-- <Person :profileData="entry"/> -->
+        </v-flex>
+      </v-layout>
       <PersonBrowser :data="file.data"/>
     </v-layout>
   </v-container>
@@ -15,10 +20,11 @@
 <script>
 import xl from "./xl";
 import dataTable from "./dataTable";
+import Person from "../components/Person";
 import PersonBrowser from "./PersonBrowser";
 export default {
   data: () => ({ files: [] }),
-  components: { xl, dataTable, PersonBrowser },
+  components: { xl, dataTable, PersonBrowser, Person },
   created: function() {},
   methods: {
     catchFile(f) {
@@ -33,14 +39,17 @@ export default {
 <style >
 .bordered {
   border-color: ivory;
-  border-width: 3px;
-  border-style: inset;
+  border-width: 2px;
+  border-style: groove;
 }
 .bordered-red {
   border-color: crimson;
+  border-style: ridge;
+  border-width: 3px;
 }
 .bordered-green {
   border-color: green;
+  /* border-style: dotted; */
 }
 .cell {
   height: 3%;
