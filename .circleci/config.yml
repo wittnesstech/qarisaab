@@ -39,6 +39,17 @@ jobs:
           working_directory: ~/dist/
           commands:
             - ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
+workflows:
+  version: 2
+  production:
+    jobs:
+      - buildCustom
+      # - test:
+      #     requires:
+      #       - build
+      #     filters:
+      #       branches:
+      #         only: master
       # version: 2
 # jobs:
 #   build:
