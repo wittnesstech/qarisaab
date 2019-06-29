@@ -1,5 +1,7 @@
 module.exports = {
-  devtool: process.env.NODE_ENV === "development" ? "source-map" : "none",
+  configureWebpack: config => {
+    devtool: process.env.NODE_ENV === "development" ? "source-map" : "none"
+  },
   pwa: {
     name: "Qari Saab",
     themeColor: "#7F4DBA",
