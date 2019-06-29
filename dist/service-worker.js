@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/precache-manifest.d3ea5fbeee42c0d14f4d850e86a05d64.js"
+  "/precache-manifest.dfb26284091b5ea9431253f524c3150f.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "qarisaab"});
