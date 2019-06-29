@@ -13,7 +13,7 @@ jobs:
   # commands:
   # - ./node_modules/.bin/firebase deploy --token=$FIREBASE_TOKEN --non-interactive
   buildCustom:
-    working_directory: ~/
+    # working_directory: ~/
     # The primary container is an instance of the first image listed. The job's commands run in this container.
     docker:
       - image: circleci/node:latest
