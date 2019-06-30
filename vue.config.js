@@ -1,6 +1,6 @@
 module.exports = {
   configureWebpack: config => {
-    devtool: process.env.NODE_ENV === "development" ? "source-map" : "eval-source-map";
+    devtool: "eval-source-map";
     console.log('process.env.NODE_ENV', process.env.NODE_ENV)
   },
   pwa: {
