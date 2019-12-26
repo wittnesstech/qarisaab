@@ -1,4 +1,4 @@
-## Qari Saab
+## QariSaab
 
 ##### A `Data Visualisation` Project
 
